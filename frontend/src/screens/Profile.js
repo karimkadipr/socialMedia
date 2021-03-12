@@ -184,7 +184,7 @@ const Profile = ({ history }) => {
                     </Button>
                   </div>
                   <>
-                    <div>
+                    <div className='info_container_one'>
                       {profileInfo.location && (
                         <>
                           <span>
@@ -217,7 +217,7 @@ const Profile = ({ history }) => {
                         {dateFormat(profileInfo.createdAt, ' mmmm , yyyy')}
                       </span>
                     </div>
-                    <div>
+                    <div className='info_container_one'>
                       {profileInfo.bio && (
                         <span>
                           <FaceIcon />
@@ -235,7 +235,9 @@ const Profile = ({ history }) => {
                       )}
                     </div>
                     {profileInfo && (
-                      <div style={{ paddingTop: 8 }}>
+                      <div
+                        style={{ paddingTop: 8 }}
+                        className='info_container_one'>
                         <span style={{ paddingRight: '1rem' }}>
                           <span style={{ fontWeight: '700' }}>
                             {profileInfo.subscriptions.length}

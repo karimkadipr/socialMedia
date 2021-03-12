@@ -257,7 +257,7 @@ const Profile = ({ history, match }) => {
                     )}
                   </div>
                   <>
-                    <div>
+                    <div className='info_container_one'>
                       {profileInfo.location && (
                         <>
                           <span>
@@ -290,7 +290,7 @@ const Profile = ({ history, match }) => {
                         {dateFormat(profileInfo.createdAt, ' mmmm , yyyy')}
                       </span>
                     </div>
-                    <div>
+                    <div className='info_container_one'>
                       {profileInfo.bio && (
                         <span>
                           <FaceIcon />
@@ -308,7 +308,9 @@ const Profile = ({ history, match }) => {
                       )}
                     </div>
                     {profileInfo && (
-                      <div style={{ paddingTop: 8 }}>
+                      <div
+                        style={{ paddingTop: 8 }}
+                        className='info_container_one'>
                         <span style={{ paddingRight: '1rem' }}>
                           <span style={{ fontWeight: '700' }}>
                             {profileInfo.subscriptions.length}

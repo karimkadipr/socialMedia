@@ -149,6 +149,10 @@
             position: relative;
             bottom: 50px;
           }
+          .info_container_one {
+            display: flex;
+            flex-wrap: wrap;
+          }
         }
         .Home_Title {
           a {
