@@ -120,14 +120,15 @@ const addAComment = asyncHandler(async (req, res) => {
 
   const post = await Post.findById(postId)
   const user = await User.findById(userId)
+  const profile = await Profile.findOne({ user: userId })
 
-  if (post && user) {
+  if (post && user && profile) {
     post.comments.unshift({
       user: userId,
       pseudo: user.pseudo,
       text,
       name: user.name,
-      avatar: user.avatar,
+      avatar: profile.avatar,
     })
     post.numberOfComments = post.comments.length
     const newPost = await post.save()
