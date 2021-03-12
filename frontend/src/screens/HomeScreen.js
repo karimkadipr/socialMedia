@@ -34,10 +34,10 @@ const HomeScreen = ({ history }) => {
   const [text, setText] = useState('')
 
   const getMyProfileValue = useSelector((state) => state.getMyProfile)
-  const { error, profileInfo } = getMyProfileValue
+  const { profileInfo } = getMyProfileValue
 
   const userLogin = useSelector((state) => state.userLogin)
-  const { userInfo } = userLogin
+  const { error, userInfo } = userLogin
 
   const getPostsForHomePageValue = useSelector(
     (state) => state.getPostsForHomePage
@@ -72,11 +72,12 @@ const HomeScreen = ({ history }) => {
     if (!profileInfo) {
       dispatch(getMyProfile())
     }
-    if (profiles.length === 0) {
+    if (profiles && profiles.length === 0) {
       dispatch(getAllProfiles())
     }
     if (
-      posts.length === 0 ||
+      (posts && posts.length === 0) ||
+      !posts ||
       successLike ||
       successDeleteLike ||
       successDelete ||
@@ -247,25 +248,26 @@ const HomeScreen = ({ history }) => {
             </div>
             <div className='you_might_know_home'>
               <div className='who_to_follow'> Who to follow</div>
-              {profiles.slice(0, 5).map((profile) => (
-                <Link key={profile._id} to={`/profile/${profile._id}`}>
-                  {profile.avatar ? (
-                    <img src={profile.avatar} alt='No profil pic' />
-                  ) : (
-                    <img
-                      src='/images/empty_profile_pic.jpg'
-                      alt='No profil pic'
-                    />
-                  )}
-                  <div className='shortcut_user_container'>
-                    <p>{profile.user.name}</p>
-                    <p>@{profile.user.pseudo}</p>
-                  </div>
-                  <IconButton>
-                    <MoreIcon />
-                  </IconButton>
-                </Link>
-              ))}
+              {profiles &&
+                profiles.slice(0, 5).map((profile) => (
+                  <Link key={profile._id} to={`/profile/${profile._id}`}>
+                    {profile.avatar ? (
+                      <img src={profile.avatar} alt='No profil pic' />
+                    ) : (
+                      <img
+                        src='/images/empty_profile_pic.jpg'
+                        alt='No profil pic'
+                      />
+                    )}
+                    <div className='shortcut_user_container'>
+                      <p>{profile.user.name}</p>
+                      <p>@{profile.user.pseudo}</p>
+                    </div>
+                    <IconButton>
+                      <MoreIcon />
+                    </IconButton>
+                  </Link>
+                ))}
               <div className='who_to_follow'>
                 <Link to='/profiles'>Show more</Link>
               </div>

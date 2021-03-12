@@ -16,13 +16,13 @@ const LoginScreen = ({ history }) => {
   const dispatch = useDispatch()
 
   const userLoginId = useSelector((state) => state.userLogin)
-  const { userInfo, error } = userLoginId
+  const { userInfo, error, success } = userLoginId
 
   useEffect(() => {
-    if (userInfo) {
+    if (userInfo || success) {
       history.push('/')
     }
-  }, [history, userInfo])
+  }, [history, userInfo, success])
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword)

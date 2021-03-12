@@ -16,13 +16,9 @@ import {
 } from '../post/postActions'
 import './styles/profile.scss'
 import TwitterIcon from '@material-ui/icons/Twitter'
-import HomeIcon from '@material-ui/icons/Home'
-import PersonIcon from '@material-ui/icons/Person'
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace'
 import PhoneIcon from '@material-ui/icons/Phone'
-import NotificationsIcon from '@material-ui/icons/Notifications'
 import CakeIcon from '@material-ui/icons/Cake'
-import AccessibilityNewIcon from '@material-ui/icons/AccessibilityNew'
 import Post from '../components/Post'
 import dateFormat from 'dateformat'
 import { ReactComponent as NoPostSvg } from './images/undraw_Posts_re_ormv.svg'
@@ -68,7 +64,7 @@ const Profile = ({ history }) => {
     if (!profileInfo) {
       dispatch(getMyProfile())
     }
-    if (profiles.length === 0) {
+    if (profiles && profiles.length === 0) {
       dispatch(getAllProfiles())
     }
     if (
@@ -243,7 +239,7 @@ const Profile = ({ history }) => {
               )}
             </div>
             <div className='posts_container'>
-              {posts.length !== 0 && profileInfo ? (
+              {posts && posts.length !== 0 && profileInfo ? (
                 posts.map((post) => (
                   <Post
                     createdAt={post.createdAt}
@@ -284,25 +280,26 @@ const Profile = ({ history }) => {
             </div>
             <div className='you_might_know_home'>
               <div className='who_to_follow'> Who to follow</div>
-              {profiles.slice(0, 5).map((profile) => (
-                <Link key={profile._id} to={`/profile/${profile._id}`}>
-                  {profile.avatar ? (
-                    <img src={profile.avatar} alt='No profil pic' />
-                  ) : (
-                    <img
-                      src='/images/empty_profile_pic.jpg'
-                      alt='No profil pic'
-                    />
-                  )}
-                  <div>
-                    <p>{profile.user.name}</p>
-                    <p>@{profile.user.pseudo}</p>
-                  </div>
-                  <IconButton>
-                    <MoreIcon />
-                  </IconButton>
-                </Link>
-              ))}
+              {profiles &&
+                profiles.slice(0, 5).map((profile) => (
+                  <Link key={profile._id} to={`/profile/${profile._id}`}>
+                    {profile.avatar ? (
+                      <img src={profile.avatar} alt='No profil pic' />
+                    ) : (
+                      <img
+                        src='/images/empty_profile_pic.jpg'
+                        alt='No profil pic'
+                      />
+                    )}
+                    <div>
+                      <p>{profile.user.name}</p>
+                      <p>@{profile.user.pseudo}</p>
+                    </div>
+                    <IconButton>
+                      <MoreIcon />
+                    </IconButton>
+                  </Link>
+                ))}
               <div className='who_to_follow'>
                 <Link to='/profiles'>Show more</Link>
               </div>

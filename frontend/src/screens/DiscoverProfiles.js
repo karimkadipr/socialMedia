@@ -61,28 +61,29 @@ const DiscoverProfiles = ({ history }) => {
               <h3>Suggested for you</h3>
             </div>
             <div className='users_container_discover'>
-              {profiles.map((profile) => (
-                <Link key={profile._id} to={`/profile/${profile._id}`}>
-                  {profile.avatar ? (
-                    <img src={profile.avatar} alt='No profil pic' />
-                  ) : (
-                    <img
-                      src='/images/empty_profile_pic.jpg'
-                      alt='No profil pic'
-                    />
-                  )}
-                  <div className='username_pseudo'>
-                    <p>{profile.user.name}</p>
-                    <p>@{profile.user.pseudo}</p>
-                    {profile.bio && <p>{profile.bio}</p>}
-                  </div>
-                  <div className='button_container'>
-                    <Button className='see_profile' variant='outlined'>
-                      See Profile
-                    </Button>
-                  </div>
-                </Link>
-              ))}
+              {profiles &&
+                profiles.map((profile) => (
+                  <Link key={profile._id} to={`/profile/${profile._id}`}>
+                    {profile.avatar ? (
+                      <img src={profile.avatar} alt='No profil pic' />
+                    ) : (
+                      <img
+                        src='/images/empty_profile_pic.jpg'
+                        alt='No profil pic'
+                      />
+                    )}
+                    <div className='username_pseudo'>
+                      <p>{profile.user.name}</p>
+                      <p>@{profile.user.pseudo}</p>
+                      {profile.bio && <p>{profile.bio}</p>}
+                    </div>
+                    <div className='button_container'>
+                      <Button className='see_profile' variant='outlined'>
+                        See Profile
+                      </Button>
+                    </div>
+                  </Link>
+                ))}
             </div>
           </div>
           <div className='main_content_right_home'>
@@ -95,22 +96,23 @@ const DiscoverProfiles = ({ history }) => {
             </div>
             <div className='you_might_know_home'>
               <div className='who_to_follow'> Who to follow</div>
-              {profiles.slice(0, 5).map((profile) => (
-                <Link key={profile._id} to={`/profile/${profile._id}`}>
-                  <img
-                    src='/images/empty_profile_pic.jpg'
-                    alt='No profil pic'
-                  />
-                  <div>
-                    <p>{profile.user.name}</p>
-                    <p>@{profile.user.pseudo}</p>
-                  </div>
+              {profiles &&
+                profiles.slice(0, 5).map((profile) => (
+                  <Link key={profile._id} to={`/profile/${profile._id}`}>
+                    <img
+                      src='/images/empty_profile_pic.jpg'
+                      alt='No profil pic'
+                    />
+                    <div>
+                      <p>{profile.user.name}</p>
+                      <p>@{profile.user.pseudo}</p>
+                    </div>
 
-                  <IconButton>
-                    <MoreIcon />
-                  </IconButton>
-                </Link>
-              ))}
+                    <IconButton>
+                      <MoreIcon />
+                    </IconButton>
+                  </Link>
+                ))}
             </div>
           </div>
         </div>
