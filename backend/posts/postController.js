@@ -14,6 +14,7 @@ const addNewPost = asyncHandler(async (req, res) => {
       name: user.name,
       pseudo: user.pseudo,
       avatar: profile.avatar,
+      profile: profile._id,
       text,
     })
     await post.save()

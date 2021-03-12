@@ -45,13 +45,13 @@ const Profile = ({ history, match }) => {
   const [successState, setSuccessState] = useState(false)
 
   const getProfileByIdValue = useSelector((state) => state.getProfileById)
-  const { error, profileInfo } = getProfileByIdValue
+  const { profileInfo } = getProfileByIdValue
 
   const getMyProfileValue = useSelector((state) => state.getMyProfile)
   const { profileInfo: MyProfileInfo } = getMyProfileValue
 
   const userLogin = useSelector((state) => state.userLogin)
-  const { userInfo } = userLogin
+  const { userInfo, error } = userLogin
 
   const getPostsByProfileValue = useSelector((state) => state.getPostsByProfile)
   const { posts, success: getPostsSuccess } = getPostsByProfileValue
@@ -95,7 +95,7 @@ const Profile = ({ history, match }) => {
       dispatch(getAllProfiles())
     }
     if (
-      posts.length === 0 ||
+      (posts && posts.length === 0) ||
       addCommentSuccess ||
       successLike ||
       successDeleteLike
@@ -307,12 +307,28 @@ const Profile = ({ history, match }) => {
                         </a>
                       )}
                     </div>
+                    {profileInfo && (
+                      <div style={{ paddingTop: 8 }}>
+                        <span style={{ paddingRight: '1rem' }}>
+                          <span style={{ fontWeight: '700' }}>
+                            {profileInfo.subscriptions.length}
+                          </span>
+                          Following
+                        </span>
+                        <span>
+                          <span style={{ fontWeight: '700' }}>
+                            {profileInfo.subscribers.length}
+                          </span>
+                          Followers
+                        </span>
+                      </div>
+                    )}
                   </>
                 </>
               )}
             </div>
             <div className='posts_container'>
-              {posts.length !== 0 && profileInfo ? (
+              {posts && posts.length !== 0 && profileInfo ? (
                 posts.map((post) => (
                   <Post
                     createdAt={post.createdAt}

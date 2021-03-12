@@ -2,7 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAnyPost, deleteCommentFromPost } from '../post/postActions'
-import { getAllProfiles, getMyProfile } from '../profile/profileActions'
+import {
+  getAllProfiles,
+  getMyProfile,
+  getProfileById,
+} from '../profile/profileActions'
 import { IconButton } from '@material-ui/core'
 import { OutlinedInput, Button, InputBase } from '@material-ui/core'
 import MoreIcon from '@material-ui/icons/More'
@@ -45,6 +49,9 @@ const PostDetails = ({ history, match }) => {
   const getAnyPostValue = useSelector((state) => state.getAnyPost)
   const { post } = getAnyPostValue
 
+  /*   const getProfileByIdValue = useSelector(state => state.getProfileById)
+  const {profileInfo : profileInfoById} = getProfileByIdValue */
+
   const likePost = useSelector((state) => state.likePost)
   const { success: successLike } = likePost
 
@@ -73,10 +80,14 @@ const PostDetails = ({ history, match }) => {
     if (!profileInfo) {
       dispatch(getMyProfile())
     }
+
     if (!post || !post.user) {
       dispatch(getAnyPost(pseudo, postId))
       dispatch(getCommentsPost(postId))
     }
+    /*   if(!profileInfoById && post) {
+      dispatch(getProfileById(post.user))
+    } */
     if (addCommentSuccess || successDeleteComment) {
       dispatch(getAnyPost(pseudo, postId))
       dispatch(getCommentsPost(postId))
@@ -84,7 +95,7 @@ const PostDetails = ({ history, match }) => {
     if (successDeleteLike || successLike) {
       dispatch(getAnyPost(pseudo, postId))
     }
-    if (profiles.length === 0) {
+    if (profiles && profiles.length === 0) {
       dispatch(getAllProfiles())
     }
     return () => {
@@ -171,7 +182,9 @@ const PostDetails = ({ history, match }) => {
             {post && profileInfo ? (
               <>
                 <div className='post_container_posts'>
-                  <div className='profile_pic_and_name'>
+                  <Link
+                    to={`/profile/${post.profile}`}
+                    className='profile_pic_and_name'>
                     {post.avatar ? (
                       <img src={post.avatar} alt='No profile pic' />
                     ) : (
@@ -184,7 +197,7 @@ const PostDetails = ({ history, match }) => {
                       <p>{post.name} </p>
                       <p>@{post.pseudo}</p>
                     </div>
-                  </div>
+                  </Link>
                   <div className='post_text_image_container'>
                     <p>{post.text}</p>
                   </div>
@@ -278,25 +291,26 @@ const PostDetails = ({ history, match }) => {
             </div>
             <div className='you_might_know_home'>
               <div className='who_to_follow'> Who to follow</div>
-              {profiles.slice(0, 5).map((profile) => (
-                <Link key={profile._id} to={`/profile/${profile._id}`}>
-                  {profile.avatar ? (
-                    <img src={profile.avatar} alt='No profil pic' />
-                  ) : (
-                    <img
-                      src='/images/empty_profile_pic.jpg'
-                      alt='No profil pic'
-                    />
-                  )}
-                  <div>
-                    <p>{profile.user.name}</p>
-                    <p>@{profile.user.pseudo}</p>
-                  </div>
-                  <IconButton>
-                    <MoreIcon />
-                  </IconButton>
-                </Link>
-              ))}
+              {profiles &&
+                profiles.slice(0, 5).map((profile) => (
+                  <Link key={profile._id} to={`/profile/${profile._id}`}>
+                    {profile.avatar ? (
+                      <img src={profile.avatar} alt='No profil pic' />
+                    ) : (
+                      <img
+                        src='/images/empty_profile_pic.jpg'
+                        alt='No profil pic'
+                      />
+                    )}
+                    <div>
+                      <p>{profile.user.name}</p>
+                      <p>@{profile.user.pseudo}</p>
+                    </div>
+                    <IconButton>
+                      <MoreIcon />
+                    </IconButton>
+                  </Link>
+                ))}
               <div className='who_to_follow'>
                 <Link to='/profiles'>Show more</Link>
               </div>

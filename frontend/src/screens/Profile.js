@@ -234,6 +234,22 @@ const Profile = ({ history }) => {
                         </a>
                       )}
                     </div>
+                    {profileInfo && (
+                      <div style={{ paddingTop: 8 }}>
+                        <span style={{ paddingRight: '1rem' }}>
+                          <span style={{ fontWeight: '700' }}>
+                            {profileInfo.subscriptions.length}
+                          </span>
+                          Following
+                        </span>
+                        <span>
+                          <span style={{ fontWeight: '700' }}>
+                            {profileInfo.subscribers.length}
+                          </span>
+                          Followers
+                        </span>
+                      </div>
+                    )}
                   </>
                 </>
               )}
