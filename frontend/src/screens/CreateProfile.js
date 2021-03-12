@@ -33,6 +33,9 @@ const CreateProfile = ({ history }) => {
   const { profileInfo } = createProfileValue
 
   useEffect(() => {
+    if (!userInfo) {
+      history.push('/login')
+    }
     if (userInfo) {
       setName(userInfo.name)
     }

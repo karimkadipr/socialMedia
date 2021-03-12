@@ -19,6 +19,7 @@ import { GET_ANY_POST_RESET } from '../post/postConstants'
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble'
 import ShareIcon from '@material-ui/icons/Share'
 import DeleteIcon from '@material-ui/icons/Delete'
+import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace'
 import './styles/postDetails.scss'
 import TwitterIcon from '@material-ui/icons/Twitter'
 import Comment from '../components/Comment'
@@ -63,6 +64,9 @@ const PostDetails = ({ history, match }) => {
   const { success: successDeleteComment } = deleteComment
 
   useEffect(() => {
+    if (!userInfo) {
+      history.push('/login')
+    }
     if (error) {
       history.push('/createprofile')
     }
@@ -157,6 +161,11 @@ const PostDetails = ({ history, match }) => {
         <div className='main_content_post'>
           <div className='main_content_left_post'>
             <div className='Home_Title_post'>
+              <Link onClick={() => history.goBack()}>
+                <IconButton>
+                  <KeyboardBackspaceIcon />
+                </IconButton>
+              </Link>
               <h3>Post</h3>
             </div>
             {post && profileInfo ? (

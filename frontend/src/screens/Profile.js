@@ -59,6 +59,9 @@ const Profile = ({ history }) => {
   const { profiles } = getAllProfilesValue
 
   useEffect(() => {
+    if (!userInfo) {
+      history.push('/login')
+    }
     if (error) {
       history.push('/createprofile')
     }
@@ -138,7 +141,7 @@ const Profile = ({ history }) => {
         <div className='main_content'>
           <div className='main_content_left'>
             <div className='Home_Title'>
-              <Link to='/'>
+              <Link onClick={() => history.goBack()}>
                 <IconButton>
                   <KeyboardBackspaceIcon />
                 </IconButton>

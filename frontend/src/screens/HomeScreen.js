@@ -23,7 +23,10 @@ import { ReactComponent as ProfileSvg } from './images/man.svg'
 import { ReactComponent as HomeSvg } from './images/house.svg'
 import { ReactComponent as TelescopeSvg } from './images/telescope.svg'
 import { GET_PROFILE_RESET } from '../profile/profileConstants'
-import { GET_MY_POST_RESET } from '../post/postConstants'
+import {
+  GET_MY_POST_RESET,
+  GET_POSTS_FOR_HOME_RESET,
+} from '../post/postConstants'
 
 const HomeScreen = ({ history }) => {
   const dispatch = useDispatch()
@@ -60,6 +63,9 @@ const HomeScreen = ({ history }) => {
   const { success: addPostSuccess } = addPostValues
 
   useEffect(() => {
+    if (!userInfo) {
+      history.push('/login')
+    }
     if (error) {
       history.push('/createprofile')
     }
@@ -131,6 +137,10 @@ const HomeScreen = ({ history }) => {
     dispatch({
       type: GET_MY_POST_RESET,
     })
+    dispatch({
+      type: GET_POSTS_FOR_HOME_RESET,
+    })
+
     history.push('/login')
   }
 
@@ -196,7 +206,7 @@ const HomeScreen = ({ history }) => {
             </div>
             <div className='empty_space_home_page'></div>
             <div className='posts_container_home'>
-              {posts.length !== 0 && profileInfo ? (
+              {posts && posts.length !== 0 && profileInfo ? (
                 posts.map((post) => (
                   <Post
                     isLiked={post.isLiked}

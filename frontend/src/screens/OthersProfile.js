@@ -22,18 +22,14 @@ import {
 } from '../post/postActions'
 import './styles/profile.scss'
 import TwitterIcon from '@material-ui/icons/Twitter'
-import HomeIcon from '@material-ui/icons/Home'
-import PersonIcon from '@material-ui/icons/Person'
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace'
 import PhoneIcon from '@material-ui/icons/Phone'
-import NotificationsIcon from '@material-ui/icons/Notifications'
 import CakeIcon from '@material-ui/icons/Cake'
 import {
   GET_PROFILE_BY_ID_RESET,
   ISFOLLOW_PROFILE_RESET,
 } from '../profile/profileConstants'
 import { GET_POSTS_BY_PROFILE_RESET } from '../post/postConstants'
-import AccessibilityNewIcon from '@material-ui/icons/AccessibilityNew'
 import Post from '../components/Post'
 import MoreIcon from '@material-ui/icons/More'
 import dateFormat from 'dateformat'
@@ -76,6 +72,9 @@ const Profile = ({ history, match }) => {
   const { profiles } = getAllProfilesValue
 
   useEffect(() => {
+    if (!userInfo) {
+      history.push('/login')
+    }
     if (error) {
       history.push('/createprofile')
     }
@@ -200,7 +199,7 @@ const Profile = ({ history, match }) => {
         <div className='main_content'>
           <div className='main_content_left'>
             <div className='Home_Title'>
-              <Link to='/'>
+              <Link onClick={() => history.goBack()}>
                 <IconButton>
                   <KeyboardBackspaceIcon />
                 </IconButton>

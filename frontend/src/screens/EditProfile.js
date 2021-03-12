@@ -39,6 +39,9 @@ const EditProfile = ({ history }) => {
   const { profileInfoUpdated, success: updateSuccess } = updateProfileValue
 
   useEffect(() => {
+    if (!userInfo) {
+      history.push('/login')
+    }
     if (updateSuccess) {
       history.push('/profile')
     }
