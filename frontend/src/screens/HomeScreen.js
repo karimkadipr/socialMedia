@@ -22,6 +22,8 @@ import { ReactComponent as NoPostSvg } from './images/undraw_Posts_re_ormv.svg'
 import { ReactComponent as ProfileSvg } from './images/man.svg'
 import { ReactComponent as HomeSvg } from './images/house.svg'
 import { ReactComponent as TelescopeSvg } from './images/telescope.svg'
+import { GET_PROFILE_RESET } from '../profile/profileConstants'
+import { GET_MY_POST_RESET } from '../post/postConstants'
 
 const HomeScreen = ({ history }) => {
   const dispatch = useDispatch()
@@ -123,6 +125,12 @@ const HomeScreen = ({ history }) => {
   }
   const handleLogout = () => {
     dispatch(logout())
+    dispatch({
+      type: GET_PROFILE_RESET,
+    })
+    dispatch({
+      type: GET_MY_POST_RESET,
+    })
     history.push('/login')
   }
 
@@ -188,7 +196,7 @@ const HomeScreen = ({ history }) => {
             </div>
             <div className='empty_space_home_page'></div>
             <div className='posts_container_home'>
-              {posts.length !== 0 ? (
+              {posts.length !== 0 && profileInfo ? (
                 posts.map((post) => (
                   <Post
                     isLiked={post.isLiked}
