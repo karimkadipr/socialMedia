@@ -269,7 +269,7 @@ const PostDetails = ({ history, match }) => {
                         myUser={userInfo._id}
                         name={comment.name}
                         pseudo={comment.pseudo}
-                        avatar={post.avatar}>
+                        avatar={comment.avatar}>
                         {comment.text}
                       </Comment>
                     ))}
