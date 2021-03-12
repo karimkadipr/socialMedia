@@ -1,0 +1,81 @@
+@import './config';
+@import './button';
+
+.hole_screen {
+  height: 969px;
+  display: flex;
+}
+.left_side_screen {
+  max-width: 55%;
+  background-color: black;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.right_side_screen {
+  min-width: 600px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 50px;
+
+  form {
+    div {
+      padding: 0.25rem 0;
+    }
+  }
+}
+
+.sign_up_screen_container {
+  h3 {
+    font-size: 40px;
+    margin: 1rem 0;
+  }
+  width: 400px;
+  .buttons_container_signup {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 120px;
+  }
+  .Submit_button_signup {
+    background: $secondary-color;
+    color: white;
+    font-weight: 700;
+    border: 1px solid $secondary-color;
+    width: 100%;
+    border-radius: 25px;
+    min-height: 55px;
+    &:hover {
+      background: $secondary-color;
+    }
+  }
+  .Submit_button_redirect_login {
+    background: white;
+    color: $secondary-color;
+    font-weight: 700;
+    border: 1px solid $secondary-color;
+    width: 100%;
+    border-radius: 25px;
+    min-height: 55px;
+    &:hover {
+      background: white;
+    }
+  }
+}
+
+.input_sign_up_container {
+  div {
+  }
+}
+
+.MuiButton-root {
+  background: red;
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  padding: 7px 14px;
+}
+.MuiButton-root:hover {
+  background-color: #5469d4;
+}

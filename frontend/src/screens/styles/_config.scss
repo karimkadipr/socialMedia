@@ -1,0 +1,30 @@
+$dark-primary-color: black;
+$light-color: white;
+$secondary-color: #1da1f2;
+$border-color: rgb(236, 236, 236);
+$small-text-color: #5b7083;
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+@mixin set-background($color) {
+  background-color: $color;
+  color: white;
+}
+
+.btn-main {
+  @include set-background($secondary-color);
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 14px;
+  font-weight: 700;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  border-radius: 25px;
+  &:hover {
+    background: darken($color: $secondary-color, $amount: 10%);
+  }
+}

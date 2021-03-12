@@ -1,0 +1,31 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node backend/server",
+    "server": "nodemon backend/server",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "bcrypt": "^5.0.1",
+    "concurrently": "^6.0.0",
+    "date-diff": "^0.2.2",
+    "dateformat": "^4.5.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
+    "from-seconds": "^1.0.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.19",
+    "nodemon": "^2.0.7",
+    "react-router-dom": "^5.2.0"
+  }
+}

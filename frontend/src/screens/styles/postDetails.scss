@@ -1,0 +1,293 @@
+@import './config';
+@import './button';
+
+.content_container_post {
+  display: flex;
+  position: relative;
+
+  //Left
+
+  .left_container_post {
+    display: flex;
+    justify-content: flex-end;
+    flex-grow: 1;
+
+    .list_container_post {
+      width: 270px;
+      position: relative;
+
+      .fixed_sidebar_profile_post {
+        position: fixed;
+        top: 0;
+        width: 246px;
+        height: 1000px;
+        padding: 0 1rem 0 0;
+        display: flex;
+        flex-direction: column;
+        a:not(:first-child) {
+          height: 60px;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          font-size: 22px;
+          padding: 0 1.25rem;
+          color: black;
+          &:hover {
+            color: black;
+          }
+          svg {
+            padding: 0 1.5rem 0 0;
+            height: 30px;
+            width: 30px;
+          }
+        }
+
+        a:first-child {
+          padding-left: 0.5rem;
+          svg {
+            height: 35px;
+            width: 35px;
+            color: $secondary-color;
+          }
+        }
+        button {
+          font-weight: 700;
+        }
+        .btn-main {
+          margin-top: 1rem;
+        }
+      }
+    }
+  }
+  // Right
+  .right_container_post {
+    display: flex;
+    justify-content: flex-start;
+    flex-grow: 1;
+
+    .main_content_post {
+      display: flex;
+      justify-content: space-between;
+      width: 990px;
+      position: relative;
+
+      .main_content_left_post {
+        width: 600px;
+        border: 1px solid $border-color;
+        border-top: 0;
+        min-height: 920px;
+        position: relative;
+        top: 53px;
+
+        .profile_info_container_post {
+          p:first-child {
+            font-weight: 700;
+            font-size: 25px;
+            margin: 0.75rem 0;
+          }
+          p {
+            margin: 0;
+            display: flex;
+            align-items: center;
+
+            span {
+              display: flex;
+              align-items: center;
+              margin-right: 5px;
+              svg {
+                margin-right: 5px;
+              }
+            }
+          }
+        }
+        .Home_Title_post {
+          display: flex;
+          align-items: center;
+          padding-left: 1rem;
+          position: fixed;
+          top: 0;
+          z-index: 999;
+          border: 1px solid $border-color;
+          border-top: 0;
+          width: 567px;
+          height: 53px;
+          padding: 0 1rem;
+          border-bottom: 1px solid $border-color;
+          background: white;
+          a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-right: 1rem;
+            svg {
+              color: $secondary-color;
+            }
+          }
+          h3 {
+            margin: 0;
+            padding-top: 5px;
+            font-weight: 1000;
+          }
+          p {
+            margin: 0;
+            font-size: 13px;
+          }
+        }
+
+        .post_container_posts {
+          display: flex;
+          flex-direction: column;
+          padding: 12px 1rem 0 1rem;
+          border-bottom: 1px solid $border-color;
+          .profile_pic_and_name {
+            display: flex;
+            align-items: center;
+
+            img {
+              width: 48px;
+              height: 48px;
+              border-radius: 50%;
+            }
+            div {
+              margin-left: 1rem;
+              p {
+                margin: 0;
+              }
+              p:first-child {
+                font-weight: 700;
+              }
+              p:last-child {
+                font-size: 15px;
+                color: grey;
+              }
+            }
+          }
+          .post_text_image_container {
+            p {
+              font-size: 25px;
+              margin: 0.5rem 0;
+            }
+          }
+          .date_post {
+            font-size: 15px;
+            color: grey;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid $border-color;
+          }
+          .likes_comments_number_post {
+            padding: 1rem 0;
+            border-bottom: 1px solid $border-color;
+            display: flex;
+            p {
+              margin: 0;
+              padding: 0 1rem;
+              span {
+                font-weight: 700;
+              }
+            }
+          }
+
+          .post_actions_post {
+            display: flex;
+            justify-content: space-evenly;
+          }
+        }
+
+        .comments_section_post {
+        }
+      }
+    }
+  }
+  .main_content_right_home {
+    width: 350px;
+    .search_bar_home {
+      position: fixed;
+      width: 350px;
+      height: 53px;
+      display: flex;
+      align-items: center;
+      background: white;
+      z-index: 999;
+      .MuiInputBase-root {
+        height: 45px;
+        background-color: lighten($border-color, 6%);
+        border-radius: 20px;
+
+        border: 2px solid $border-color;
+      }
+      .Mui-focused {
+        background-color: white;
+        transition: all 1s;
+        border: 2px solid $secondary-color;
+      }
+      .MuiOutlinedInput-notchedOutline {
+        border: none;
+      }
+    }
+    .you_might_know_home {
+      position: fixed;
+      width: 316px;
+      top: 60px;
+      padding: 0 1rem;
+      border: 1px solid $border-color;
+      background: lighten($border-color, 6%);
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      a {
+        border-bottom: 1px solid $border-color;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        height: 80px;
+        img {
+          width: 45px;
+          height: 45px;
+          border-radius: 50%;
+        }
+        p {
+          margin: 0;
+        }
+        p:last-child {
+          font-size: 14px;
+        }
+        div {
+          padding-left: 1rem;
+          flex-grow: 2;
+        }
+        button {
+          margin-left: 90px;
+        }
+      }
+      a:last-child {
+        border-bottom: none;
+      }
+      svg {
+        color: $secondary-color;
+      }
+    }
+  }
+  .write_new_comment_post_screen {
+    .MuiInputBase-input {
+      width: 350px;
+      margin: 0 1rem 0 0;
+      padding: 1rem 0 1rem 1rem;
+      border: 1px solid $secondary-color;
+      border-radius: 15px;
+    }
+    .button_add_comment_post_screen {
+      background: $secondary-color;
+      color: white;
+      font-weight: 600;
+      border: 1px solid $secondary-color;
+      font-size: 13px;
+      border-radius: 15px;
+      height: 50px;
+      width: 100px;
+      &:hover {
+        background: $secondary-color;
+      }
+      text-transform: none;
+    }
+  }
+}

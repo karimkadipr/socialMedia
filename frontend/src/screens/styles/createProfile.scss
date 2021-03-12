@@ -1,0 +1,60 @@
+@import './config';
+
+.the_hole_create_profile_page {
+  background-size: 200%;
+  animation: bg-animation 5s infinite alternate;
+  height: 894px;
+  padding-top: 75px;
+}
+
+@keyframes bg-animation {
+  0% {
+    background-position: left;
+  }
+  100% {
+    background-position: right;
+  }
+}
+
+.create_profile_container {
+  width: 60%;
+  margin: auto;
+  .MuiSelect-root {
+    display: flex;
+    align-items: center;
+    height: 40px;
+  }
+  .MuiInputBase-root {
+    background-color: lighten($border-color, 6%);
+    border-radius: 10px;
+    border: 3px solid $border-color;
+  }
+  .Mui-focused {
+    background-color: white;
+    transition: all 1s;
+    border: 3px solid $secondary-color;
+  }
+  .MuiOutlinedInput-notchedOutline {
+    border: none;
+  }
+  .create_profile_input_container {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    padding: 0 0.1rem 0.75rem 0;
+  }
+  .create_submit_button {
+    background: $secondary-color;
+    color: white;
+    font-weight: 600;
+    width: 100px;
+    border: 1px solid $secondary-color;
+    font-size: 15px;
+    border-radius: 15px;
+    height: 50px;
+    &:hover {
+      background: $secondary-color;
+    }
+    text-transform: none;
+  }
+}

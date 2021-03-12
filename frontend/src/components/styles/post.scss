@@ -1,0 +1,100 @@
+@import '../../screens/styles/config';
+
+.post_biggest_container {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid $border-color;
+}
+.post_container {
+  position: relative;
+  padding: 0.5rem 1rem;
+  display: flex;
+  padding-bottom: 55px;
+  transition: all 0.5s;
+  &:hover {
+    background: lighten($border-color, 5%);
+  }
+}
+
+.profile_pic_post_container {
+  flex-basis: 48px;
+  margin-right: 1rem;
+  height: 100%;
+}
+
+.profile_pic_post {
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+}
+
+.content_post {
+  flex-basis: 506px;
+  p {
+    margin: 0;
+  }
+  p:first-child {
+    span:first-child {
+      font-weight: 700;
+    }
+    span:nth-child(2) {
+      color: $small-text-color;
+      font-size: 14px;
+    }
+    span:nth-child(3) {
+      color: $small-text-color;
+      font-size: 14px;
+    }
+  }
+}
+
+.icons_post {
+  height: 0;
+  display: flex;
+  justify-content: space-evenly;
+
+  svg {
+    height: 20px;
+    width: 20px;
+  }
+  .icon_post {
+    position: relative;
+    bottom: 50px;
+    span {
+      font-size: 12px;
+    }
+  }
+  .span_in_button {
+    padding: 0;
+  }
+}
+
+.write_new_comment {
+  .MuiInputBase-input {
+    width: 350px;
+    margin: 0 1rem 0 80px;
+    padding: 1rem 0 1rem 1rem;
+    border: 1px solid $secondary-color;
+    border-radius: 15px;
+  }
+  .button_add_comment {
+    background: $secondary-color;
+    color: white;
+    font-weight: 600;
+    border: 1px solid $secondary-color;
+    font-size: 13px;
+    border-radius: 15px;
+    height: 50px;
+    width: 100px;
+    &:hover {
+      background: $secondary-color;
+    }
+    text-transform: none;
+  }
+}
