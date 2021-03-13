@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.2676a7e8.chunk.css",
-    "main.js": "/static/js/main.608087b3.chunk.js",
-    "main.js.map": "/static/js/main.608087b3.chunk.js.map",
+    "main.css": "/static/css/main.2a37bf3a.chunk.css",
+    "main.js": "/static/js/main.b99577c4.chunk.js",
+    "main.js.map": "/static/js/main.b99577c4.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.248907bc.js",
     "runtime-main.js.map": "/static/js/runtime-main.248907bc.js.map",
     "static/js/2.349f1e38.chunk.js": "/static/js/2.349f1e38.chunk.js",
     "static/js/2.349f1e38.chunk.js.map": "/static/js/2.349f1e38.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.2676a7e8.chunk.css.map": "/static/css/main.2676a7e8.chunk.css.map",
+    "static/css/main.2a37bf3a.chunk.css.map": "/static/css/main.2a37bf3a.chunk.css.map",
     "static/js/2.349f1e38.chunk.js.LICENSE.txt": "/static/js/2.349f1e38.chunk.js.LICENSE.txt",
     "static/media/house.de5793aa.svg": "/static/media/house.de5793aa.svg",
     "static/media/man.34c87aab.svg": "/static/media/man.34c87aab.svg",
@@ -18,7 +18,7 @@
   "entrypoints": [
     "static/js/runtime-main.248907bc.js",
     "static/js/2.349f1e38.chunk.js",
-    "static/css/main.2676a7e8.chunk.css",
-    "static/js/main.608087b3.chunk.js"
+    "static/css/main.2a37bf3a.chunk.css",
+    "static/js/main.b99577c4.chunk.js"
   ]
 }

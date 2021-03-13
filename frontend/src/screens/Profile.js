@@ -136,16 +136,16 @@ const Profile = ({ history }) => {
                 <img
                   className='cover_image_itself'
                   src={profileInfo.coverImage}
-                  alt='No profil pic'
+                  alt='No profile pic'
                 />
               )}
               <div className='profile_pic_container'>
                 {profileInfo && profileInfo.avatar ? (
-                  <img src={profileInfo.avatar} alt='No profil pic' />
+                  <img src={profileInfo.avatar} alt='No profile pic' />
                 ) : (
                   <img
                     src='/images/empty_profile_pic.jpg'
-                    alt='No profil pic'
+                    alt='No profile pic'
                   />
                 )}
               </div>

@@ -212,6 +212,7 @@ const EditProfile = ({ history }) => {
                 name='img'
                 onChange={uploadFileHandlerAvatar}
               />
+              {uploading && <div>Uploading ...</div>}
             </div>
 
             <div style={{ width: '45%' }}>
@@ -229,6 +230,7 @@ const EditProfile = ({ history }) => {
                 name='img'
                 onChange={uploadFileHandlerCover}
               />
+              {uploading && <div>Uploading ...</div>}
             </div>
           </div>
           <InputLabel id='demo-simple-select-label'>Bio</InputLabel>

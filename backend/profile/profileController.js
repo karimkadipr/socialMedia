@@ -239,7 +239,7 @@ const getAllProfiles = asyncHandler(async (req, res) => {
     : {}
 
   let users = await User.find({ ...keyword })
-  console.log(users)
+
   let usersId = users.map((user) => user._id)
 
   let profiles = await Profile.find({ user: { $in: usersId } }).populate(

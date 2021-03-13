@@ -267,7 +267,7 @@ const CreateProfile = ({ history }) => {
                 name='img'
                 onChange={uploadFileHandlerAvatar}
               />
-              {uploading && <div>Uploading</div>}
+              {uploading && <div>Uploading ...</div>}
             </div>
             <div style={{ width: '45%' }}>
               <OutlinedInput
@@ -284,6 +284,7 @@ const CreateProfile = ({ history }) => {
                 name='img'
                 onChange={uploadFileHandlerCover}
               />
+              {uploading && <div>Uploading ...</div>}
             </div>
           </div>
           <InputLabel id='demo-simple-select-label'>Bio</InputLabel>
