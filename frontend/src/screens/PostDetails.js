@@ -225,7 +225,7 @@ const PostDetails = ({ history, match }) => {
                     <Comment
                       name={userInfo.name}
                       pseudo={userInfo.pseudo}
-                      avatar={post.avatar}>
+                      avatar={profileInfo.avatar}>
                       <div className='write_new_comment_post_screen'>
                         <InputBase
                           multiline={true}
