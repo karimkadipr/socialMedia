@@ -73,7 +73,7 @@ export const getAllProfilesReducer = (state = { profiles: [] }, action) => {
 export const getProfileByIdReducer = (state = {}, action) => {
   switch (action.type) {
     case GET_PROFILE_BY_ID_REQUEST:
-      return { ...state, loading: true }
+      return { loading: true }
     case GET_PROFILE_BY_ID_SUCCESS:
       return { loading: false, success: true, profileInfo: action.payload }
     case GET_PROFILE_BY_ID_FAIL:

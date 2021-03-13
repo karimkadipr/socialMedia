@@ -31,7 +31,6 @@ const LoginScreen = ({ history }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     dispatch(userLogin({ email, password }))
-    console.log(password)
   }
   return (
     <div className='hole_screen'>

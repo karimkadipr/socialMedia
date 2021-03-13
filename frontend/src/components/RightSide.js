@@ -5,7 +5,7 @@ import { IconButton, OutlinedInput } from '@material-ui/core'
 import MoreIcon from '@material-ui/icons/More'
 import './styles/rightSide.scss'
 
-const RightSide = ({ profiles, showMore, history }) => {
+const RightSide = ({ profiles, showMore, history, handleChangeLink }) => {
   const [keyword, setKeyword] = useState('')
 
   const handleKeypress = (e) => {
@@ -33,7 +33,10 @@ const RightSide = ({ profiles, showMore, history }) => {
         <div className='who_to_follow'> Who to follow</div>
         {profiles &&
           profiles.slice(0, 5).map((profile) => (
-            <Link key={profile._id} to={`/profile/${profile._id}`}>
+            <Link
+              key={profile._id}
+              to={`/profile/${profile._id}`}
+              onClick={handleChangeLink}>
               {profile.avatar ? (
                 <img src={profile.avatar} alt='No profil pic' />
               ) : (

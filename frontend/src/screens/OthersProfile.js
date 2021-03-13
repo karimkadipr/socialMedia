@@ -38,6 +38,7 @@ import LeftSide from '../components/LeftSide'
 
 const Profile = ({ history, match }) => {
   const profileId = match.params.id
+
   const dispatch = useDispatch()
   const [comment, setComment] = useState('')
   const [successState, setSuccessState] = useState(false)
@@ -92,6 +93,7 @@ const Profile = ({ history, match }) => {
     if (profiles.length === 0) {
       dispatch(getAllProfiles())
     }
+
     if (
       (posts && posts.length === 0) ||
       addCommentSuccess ||
@@ -112,6 +114,7 @@ const Profile = ({ history, match }) => {
     addCommentSuccess,
     successLike,
     successDeleteLike,
+    match,
   ])
 
   useEffect(() => {
@@ -340,7 +343,11 @@ const Profile = ({ history, match }) => {
               )}
             </div>
           </div>
-          <RightSide profiles={profiles} showMore />
+          <RightSide
+            handleChangeLink={handleChangeLink}
+            profiles={profiles}
+            showMore
+          />
         </div>
       </div>
     </div>
