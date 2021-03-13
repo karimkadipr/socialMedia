@@ -15,48 +15,6 @@
     .list_container_post {
       width: 270px;
       position: relative;
-
-      .fixed_sidebar_profile_post {
-        position: fixed;
-        top: 0;
-        width: 246px;
-        height: 1000px;
-        padding: 0 1rem 0 0;
-        display: flex;
-        flex-direction: column;
-        a:not(:first-child) {
-          height: 60px;
-          display: flex;
-          justify-content: flex-start;
-          align-items: center;
-          font-size: 22px;
-          padding: 0 1.25rem;
-          color: black;
-          &:hover {
-            color: black;
-          }
-          svg {
-            padding: 0 1.5rem 0 0;
-            height: 30px;
-            width: 30px;
-          }
-        }
-
-        a:first-child {
-          padding-left: 0.5rem;
-          svg {
-            height: 35px;
-            width: 35px;
-            color: $secondary-color;
-          }
-        }
-        button {
-          font-weight: 700;
-        }
-        .btn-main {
-          margin-top: 1rem;
-        }
-      }
     }
   }
   // Right

@@ -31,6 +31,8 @@ import dateFormat from 'dateformat'
 import { ReactComponent as ProfileSvg } from './images/man.svg'
 import { ReactComponent as HomeSvg } from './images/house.svg'
 import { ReactComponent as TelescopeSvg } from './images/telescope.svg'
+import RightSide from '../components/RightSide'
+import LeftSide from '../components/LeftSide'
 
 const PostDetails = ({ history, match }) => {
   const pseudo = match.params.pseudo
@@ -149,30 +151,14 @@ const PostDetails = ({ history, match }) => {
     <div className='content_container_post'>
       <div className='left_container_post'>
         <div className='list_container_post'>
-          <div className='fixed_sidebar_profile_post'>
-            <Link to='/'>
-              <IconButton>
-                <TwitterIcon />
-              </IconButton>
-            </Link>
-            <Link to='/'>
-              <HomeSvg /> Home
-            </Link>
-            <Link to='/profile'>
-              <ProfileSvg /> Profile
-            </Link>
-            <Link to='/profiles'>
-              <TelescopeSvg /> Discover
-            </Link>
-            <button className='btn-main'>Post</button>
-          </div>
+          <LeftSide post />
         </div>
       </div>
       <div className='right_container_post'>
         <div className='main_content_post'>
           <div className='main_content_left_post'>
             <div className='Home_Title_post'>
-              <Link onClick={() => history.goBack()}>
+              <Link to='#' onClick={() => history.goBack()}>
                 <IconButton>
                   <KeyboardBackspaceIcon />
                 </IconButton>
@@ -281,41 +267,7 @@ const PostDetails = ({ history, match }) => {
 
             <div className='posts_container_post'></div>
           </div>
-          <div className='main_content_right_home'>
-            <div className='search_bar_home'>
-              <OutlinedInput
-                type='text'
-                placeholder='Enter your Name'
-                fullWidth={true}
-              />
-            </div>
-            <div className='you_might_know_home'>
-              <div className='who_to_follow'> Who to follow</div>
-              {profiles &&
-                profiles.slice(0, 5).map((profile) => (
-                  <Link key={profile._id} to={`/profile/${profile._id}`}>
-                    {profile.avatar ? (
-                      <img src={profile.avatar} alt='No profil pic' />
-                    ) : (
-                      <img
-                        src='/images/empty_profile_pic.jpg'
-                        alt='No profil pic'
-                      />
-                    )}
-                    <div>
-                      <p>{profile.user.name}</p>
-                      <p>@{profile.user.pseudo}</p>
-                    </div>
-                    <IconButton>
-                      <MoreIcon />
-                    </IconButton>
-                  </Link>
-                ))}
-              <div className='who_to_follow'>
-                <Link to='/profiles'>Show more</Link>
-              </div>
-            </div>
-          </div>
+          <RightSide profiles={profiles} showMore />
         </div>
       </div>
     </div>

@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getMyProfile, getAllProfiles } from '../profile/profileActions'
 import { logout } from '../user/userActions'
 import { getPostsForHomePage } from '../post/postActions'
-import { IconButton, OutlinedInput, InputBase } from '@material-ui/core'
-import MoreIcon from '@material-ui/icons/More'
+import { InputBase } from '@material-ui/core'
 import {
   deletePostById,
   likePostById,
@@ -13,20 +11,17 @@ import {
   deleteLikePostById,
   addPost,
 } from '../post/postActions'
+import './styles/layout.scss'
 import './styles/home.scss'
-import TwitterIcon from '@material-ui/icons/Twitter'
-
 import Post from '../components/Post'
 import { ReactComponent as NoPostSvg } from './images/undraw_Posts_re_ormv.svg'
-
-import { ReactComponent as ProfileSvg } from './images/man.svg'
-import { ReactComponent as HomeSvg } from './images/house.svg'
-import { ReactComponent as TelescopeSvg } from './images/telescope.svg'
 import { GET_PROFILE_RESET } from '../profile/profileConstants'
 import {
   GET_MY_POST_RESET,
   GET_POSTS_FOR_HOME_RESET,
 } from '../post/postConstants'
+import RightSide from '../components/RightSide'
+import LeftSide from '../components/LeftSide'
 
 const HomeScreen = ({ history }) => {
   const dispatch = useDispatch()
@@ -34,7 +29,7 @@ const HomeScreen = ({ history }) => {
   const [text, setText] = useState('')
 
   const getMyProfileValue = useSelector((state) => state.getMyProfile)
-  const { profileInfo } = getMyProfileValue
+  const { profileInfo, error: getMyProfileError } = getMyProfileValue
 
   const userLogin = useSelector((state) => state.userLogin)
   const { error, userInfo } = userLogin
@@ -63,6 +58,9 @@ const HomeScreen = ({ history }) => {
   const { success: addPostSuccess } = addPostValues
 
   useEffect(() => {
+    if (getMyProfileError) {
+      history.push('/createprofile')
+    }
     if (!userInfo) {
       history.push('/login')
     }
@@ -96,6 +94,7 @@ const HomeScreen = ({ history }) => {
     addCommentSuccess,
     profileInfo,
     addPostSuccess,
+    getMyProfileError,
   ])
 
   useEffect(() => {
@@ -146,35 +145,16 @@ const HomeScreen = ({ history }) => {
   }
 
   return (
-    <div className='content_container_home'>
-      <div className='left_container_home'>
-        <div className='list_container_home'>
-          <div className='fixed_sidebar_profile_home'>
-            <Link to='/'>
-              <IconButton>
-                <TwitterIcon />
-              </IconButton>
-            </Link>
-            <Link to='/'>
-              <HomeSvg /> Home
-            </Link>
-            <Link to='/profile'>
-              <ProfileSvg /> Profile
-            </Link>
-            <Link to='/profiles'>
-              <TelescopeSvg /> Discover
-            </Link>
-
-            <button onClick={handleLogout} className='btn-main'>
-              logout
-            </button>
-          </div>
+    <div className='content_container'>
+      <div className='left_container'>
+        <div className='list_container'>
+          <LeftSide logout handleLogout={handleLogout} />
         </div>
       </div>
-      <div className='right_container_home'>
-        <div className='main_content_home'>
-          <div className='main_content_left_home'>
-            <div className='Home_Title_home'>
+      <div className='right_container'>
+        <div className='main_content'>
+          <div className='main_content_left'>
+            <div className='Home_Title'>
               <h3>Home</h3>
             </div>
 
@@ -238,41 +218,7 @@ const HomeScreen = ({ history }) => {
               )}
             </div>
           </div>
-          <div className='main_content_right_home'>
-            <div className='search_bar_home'>
-              <OutlinedInput
-                type='text'
-                placeholder='Enter your Name'
-                fullWidth={true}
-              />
-            </div>
-            <div className='you_might_know_home'>
-              <div className='who_to_follow'> Who to follow</div>
-              {profiles &&
-                profiles.slice(0, 5).map((profile) => (
-                  <Link key={profile._id} to={`/profile/${profile._id}`}>
-                    {profile.avatar ? (
-                      <img src={profile.avatar} alt='No profil pic' />
-                    ) : (
-                      <img
-                        src='/images/empty_profile_pic.jpg'
-                        alt='No profil pic'
-                      />
-                    )}
-                    <div className='shortcut_user_container'>
-                      <p>{profile.user.name}</p>
-                      <p>@{profile.user.pseudo}</p>
-                    </div>
-                    <IconButton>
-                      <MoreIcon />
-                    </IconButton>
-                  </Link>
-                ))}
-              <div className='who_to_follow'>
-                <Link to='/profiles'>Show more</Link>
-              </div>
-            </div>
-          </div>
+          <RightSide profiles={profiles} showMore />
         </div>
       </div>
     </div>

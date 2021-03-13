@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
+import { FormControl } from '@material-ui/core'
 import {
   OutlinedInput,
   InputLabel,
@@ -7,13 +9,18 @@ import {
   MenuItem,
   Button,
 } from '@material-ui/core'
+import { GET_PROFILE_RESET } from '../profile/profileConstants'
+import {
+  GET_MY_POST_RESET,
+  GET_POSTS_FOR_HOME_RESET,
+} from '../post/postConstants'
+import { logout } from '../user/userActions'
 import { createProfile } from '../profile/profileActions'
+import ErrorMessage from '../components/ErrorSuccess'
 import './styles/createProfile.scss'
 
 const CreateProfile = ({ history }) => {
-  const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
-  const [pseudo, setPseudo] = useState('')
   const [day, setDay] = useState(1)
   const [month, setMonth] = useState('')
   const [year, setYear] = useState(0)
@@ -23,6 +30,7 @@ const CreateProfile = ({ history }) => {
   const [avatar, setAvatar] = useState('')
   const [coverImage, setCoverImage] = useState('')
   const [website, setWebsite] = useState('')
+  const [uploading, setUploading] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -30,14 +38,11 @@ const CreateProfile = ({ history }) => {
   const { userInfo } = userLogin
 
   const createProfileValue = useSelector((state) => state.createProfile)
-  const { profileInfo } = createProfileValue
+  const { profileInfo, error } = createProfileValue
 
   useEffect(() => {
     if (!userInfo) {
       history.push('/login')
-    }
-    if (userInfo) {
-      setName(userInfo.name)
     }
     if (profileInfo) {
       history.push('/profile')
@@ -47,7 +52,6 @@ const CreateProfile = ({ history }) => {
     e.preventDefault()
     dispatch(
       createProfile({
-        name,
         phone,
         day,
         month,
@@ -61,7 +65,7 @@ const CreateProfile = ({ history }) => {
       })
     )
   }
-  let arr = []
+  let arr = ['Day']
   for (let i = 1; i <= 31; i++) {
     arr.push(i)
   }
@@ -74,6 +78,7 @@ const CreateProfile = ({ history }) => {
     'May',
     'June',
     'July',
+    'august',
     'September',
     'October',
     'November',
@@ -85,35 +90,103 @@ const CreateProfile = ({ history }) => {
     arrYear.push(i)
   }
 
+  const uploadFileHandlerAvatar = async (e) => {
+    const file = e.target.files[0]
+    const formData = new FormData()
+    formData.append('image', file)
+    setUploading(true)
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+      const { data } = await axios.post('/api/upload/avatar', formData, config)
+      setAvatar(data)
+      setUploading(false)
+    } catch (error) {
+      console.error(error)
+      setUploading(false)
+    }
+  }
+
+  const uploadFileHandlerCover = async (e) => {
+    const file = e.target.files[0]
+    const formData = new FormData()
+    formData.append('image', file)
+    setUploading(true)
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+      const { data } = await axios.post('/api/upload/cover', formData, config)
+      setCoverImage(data)
+      setUploading(false)
+    } catch (error) {
+      console.error(error)
+      setUploading(false)
+    }
+  }
+
+  const handleLogout = () => {
+    dispatch(logout())
+    dispatch({
+      type: GET_PROFILE_RESET,
+    })
+    dispatch({
+      type: GET_MY_POST_RESET,
+    })
+    dispatch({
+      type: GET_POSTS_FOR_HOME_RESET,
+    })
+
+    history.push('/login')
+  }
+
   return (
     <div className='the_hole_create_profile_page'>
       <div className='create_profile_container'>
         <h1>Create your profile !</h1>
         <form onSubmit={handleSubmit}>
+          {error && (
+            <ErrorMessage color='red'>
+              Phone number and birth date are required
+            </ErrorMessage>
+          )}
           <InputLabel id='demo-simple-select-label'>Phone Number*</InputLabel>
           <div className='create_profile_input_container'>
             <OutlinedInput
               type='text'
-              helperText='Required *'
               onChange={(e) => setPhone(e.target.value)}
               placeholder='Enter your Phone'
-              required
               fullWidth={true}
             />
           </div>
 
           <div className='create_profile_input_container'>
             <div
-              style={{ marginRight: '1rem', fontSize: 18, fontWeight: '700' }}>
-              Date of Birth :
+              style={{
+                marginRight: '1rem',
+                fontSize: 18,
+                fontWeight: '700',
+              }}>
+              Date of Birth* :
             </div>
-            <div style={{ width: '25%', marginRight: '1%' }}>
-              <InputLabel id='demo-simple-select-label'>Day*</InputLabel>
+
+            <FormControl
+              variant='outlined'
+              fullWidth
+              style={{ width: '25%', marginRight: '1%' }}>
+              <InputLabel id='demo-simple-select-outlined-label'>
+                Day
+              </InputLabel>
               <Select
                 fullWidth
-                labelId='demo-simple-select-label'
-                id='demo-simple-select'
-                defaultValue='1'
+                labelId='demo-simple-select-outlined-label'
+                id='demo-simple-select-outlined'
+                label='Day'
                 onChange={(e) => setDay(e.target.value)}>
                 {arr.map((item) => (
                   <MenuItem key={item} value={item}>
@@ -121,14 +194,18 @@ const CreateProfile = ({ history }) => {
                   </MenuItem>
                 ))}
               </Select>
-            </div>
-            <div style={{ width: '25%', marginRight: '1%' }}>
-              <InputLabel id='demo-simple-select-label'>Month*</InputLabel>
+            </FormControl>
+
+            <FormControl
+              variant='outlined'
+              fullWidth
+              style={{ width: '25%', marginRight: '1%' }}>
+              <InputLabel id='demo-simple-select-label'>Month</InputLabel>
               <Select
                 fullWidth
-                labelId='demo-simple-select-label'
-                id='demo-simple-select'
-                defaultValue='January'
+                labelId='demo-simple-select-outlined-label'
+                id='demo-simple-select-outlined'
+                label='Month'
                 onChange={(e) => setMonth(e.target.value)}>
                 {arrMonth.map((item) => (
                   <MenuItem key={item} value={item}>
@@ -136,14 +213,15 @@ const CreateProfile = ({ history }) => {
                   </MenuItem>
                 ))}
               </Select>
-            </div>
-            <div style={{ width: '25%' }}>
-              <InputLabel id='demo-simple-select-label'>Year*</InputLabel>
+            </FormControl>
+
+            <FormControl variant='outlined' fullWidth style={{ width: '25%' }}>
+              <InputLabel id='demo-simple-select-label'>Year</InputLabel>
               <Select
                 fullWidth
-                labelId='demo-simple-select-label'
-                id='demo-simple-select'
-                defaultValue='2000'
+                labelId='demo-simple-select-outlined-label'
+                id='demo-simple-select-outlined'
+                label='Year'
                 onChange={(e) => setYear(e.target.value)}>
                 {arrYear.map((item) => (
                   <MenuItem key={item} value={item}>
@@ -151,7 +229,7 @@ const CreateProfile = ({ history }) => {
                   </MenuItem>
                 ))}
               </Select>
-            </div>
+            </FormControl>
           </div>
           <InputLabel id='demo-simple-select-label'>Location</InputLabel>
           <div className='create_profile_input_container'>
@@ -177,20 +255,35 @@ const CreateProfile = ({ history }) => {
             <div style={{ width: '45%', marginRight: '5%' }}>
               <OutlinedInput
                 type='text'
+                value={avatar}
                 onChange={(e) => setAvatar(e.target.value)}
                 placeholder='Enter your Avatar Image'
                 fullWidth={true}
               />
-              <button>Upload</button>
+              <input
+                className='custom-file-input'
+                type='file'
+                id='img'
+                name='img'
+                onChange={uploadFileHandlerAvatar}
+              />
+              {uploading && <div>Uploading</div>}
             </div>
             <div style={{ width: '45%' }}>
               <OutlinedInput
                 type='text'
+                value={coverImage}
                 onChange={(e) => setCoverImage(e.target.value)}
                 placeholder='Enter your Cover Image'
                 fullWidth={true}
               />
-              <button>Upload</button>
+              <input
+                className='custom-file-input'
+                type='file'
+                id='img'
+                name='img'
+                onChange={uploadFileHandlerCover}
+              />
             </div>
           </div>
           <InputLabel id='demo-simple-select-label'>Bio</InputLabel>
@@ -211,10 +304,14 @@ const CreateProfile = ({ history }) => {
               fullWidth={true}
             />
           </div>
-
-          <Button className='create_submit_button' type='submit'>
-            Create
-          </Button>
+          <div className='buttons_container_create_profile'>
+            <Button className='create_submit_button' type='submit'>
+              Create
+            </Button>
+            <Button className='logout_submit_button' onClick={handleLogout}>
+              Logout
+            </Button>
+          </div>
         </form>
       </div>
     </div>

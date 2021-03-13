@@ -1,301 +1,120 @@
 @import './config';
 
-.content_container {
-  display: flex;
+//Left
+
+// Right
+
+.profile_info_container {
+  position: relative;
+  .name_button {
+    display: flex;
+    justify-content: space-between;
+
+    .edit_profile_button {
+      background: white;
+      color: $secondary-color;
+      font-weight: 1000;
+      font-size: 13px;
+      border: 1px solid $secondary-color;
+      border-radius: 18px;
+      height: 50px;
+      &:hover {
+        background: white;
+      }
+      text-transform: none;
+    }
+    .unfollow_button_profile {
+      background: white;
+      color: $secondary-color;
+      font-weight: 1000;
+      font-size: 13px;
+      border: 1px solid $secondary-color;
+      border-radius: 18px;
+      height: 50px;
+      &:hover {
+        background: white;
+      }
+      text-transform: none;
+    }
+    .follow_button_profile {
+      background: $secondary-color;
+      color: white;
+      font-weight: 1000;
+      border: 1px solid $secondary-color;
+      font-size: 13px;
+      border-radius: 15px;
+      height: 50px;
+      &:hover {
+        background: $secondary-color;
+      }
+      text-transform: none;
+    }
+  }
+  p:first-child {
+    font-weight: 700;
+    font-size: 25px;
+    margin: 0.75rem 0;
+  }
+  div {
+    margin: 0;
+    display: flex;
+    align-items: center;
+
+    span {
+      display: flex;
+      align-items: center;
+      margin-right: 5px;
+      svg {
+        margin-right: 5px;
+      }
+    }
+  }
+  button {
+    position: relative;
+    bottom: 50px;
+  }
+  .info_container_one {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+.cover_container {
+  height: 200px;
+  width: 100%;
+  background: rgb(189, 189, 189);
   position: relative;
 
-  //Left
-
-  .left_container {
-    display: flex;
-    justify-content: flex-end;
-    flex-grow: 1;
-
-    .list_container {
-      width: 270px;
-      position: relative;
-
-      .fixed_sidebar_profile {
-        position: fixed;
-        top: 0;
-        width: 246px;
-        height: 1000px;
-        padding: 0 1rem 0 0;
-        display: flex;
-        flex-direction: column;
-        a:not(:first-child) {
-          height: 60px;
-          display: flex;
-          justify-content: flex-start;
-          align-items: center;
-          font-size: 22px;
-          padding: 0 1.25rem;
-          color: black;
-          &:hover {
-            color: black;
-          }
-          svg {
-            padding: 0 1.5rem 0 0;
-            height: 30px;
-            width: 30px;
-          }
-        }
-
-        a:first-child {
-          padding-left: 0.5rem;
-          svg {
-            height: 35px;
-            width: 35px;
-            color: $secondary-color;
-          }
-        }
-        button {
-          font-weight: 700;
-        }
-        .btn-main {
-          margin-top: 1rem;
-        }
-      }
+  .profile_pic_container {
+    border: 1px solid $border-color;
+    height: 133.5px;
+    width: 133.5px;
+    border-radius: 50%;
+    position: relative;
+    top: 133.25px;
+    left: 1rem;
+    background: white;
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
     }
   }
-  // Right
-  .right_container {
-    display: flex;
-    justify-content: flex-start;
-    flex-grow: 1;
+}
 
-    .main_content {
-      display: flex;
-      justify-content: space-between;
-      width: 990px;
-      position: relative;
+.profile_info_container {
+  padding: 1rem;
+  position: relative;
+  top: 50px;
+  border-bottom: 1px solid $border-color;
+}
 
-      .main_content_left {
-        width: 600px;
-        border: 1px solid $border-color;
-        border-top: 0;
-        height: 2000px;
-        position: relative;
-        top: 53px;
-
-        .profile_info_container {
-          position: relative;
-          .name_button {
-            display: flex;
-            justify-content: space-between;
-
-            .edit_profile_button {
-              background: white;
-              color: $secondary-color;
-              font-weight: 1000;
-              font-size: 13px;
-              border: 1px solid $secondary-color;
-              border-radius: 18px;
-              height: 50px;
-              &:hover {
-                background: white;
-              }
-              text-transform: none;
-            }
-            div {
-            }
-            .unfollow_button_profile {
-              background: white;
-              color: $secondary-color;
-              font-weight: 1000;
-              font-size: 13px;
-              border: 1px solid $secondary-color;
-              border-radius: 18px;
-              height: 50px;
-              &:hover {
-                background: white;
-              }
-              text-transform: none;
-            }
-            .follow_button_profile {
-              background: $secondary-color;
-              color: white;
-              font-weight: 1000;
-              border: 1px solid $secondary-color;
-              font-size: 13px;
-              border-radius: 15px;
-              height: 50px;
-              &:hover {
-                background: $secondary-color;
-              }
-              text-transform: none;
-            }
-          }
-          p:first-child {
-            font-weight: 700;
-            font-size: 25px;
-            margin: 0.75rem 0;
-          }
-          div {
-            margin: 0;
-            display: flex;
-            align-items: center;
-
-            span {
-              display: flex;
-              align-items: center;
-              margin-right: 5px;
-              svg {
-                margin-right: 5px;
-              }
-            }
-          }
-          button {
-            position: relative;
-            bottom: 50px;
-          }
-          .info_container_one {
-            display: flex;
-            flex-wrap: wrap;
-          }
-        }
-        .Home_Title {
-          a {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding-right: 1rem;
-            svg {
-              color: $secondary-color;
-            }
-          }
-          display: flex;
-          position: fixed;
-          top: 0;
-          z-index: 999;
-          border: 1px solid $border-color;
-          border-top: 0;
-          width: 567px;
-          height: 53px;
-          padding: 0 1rem;
-          border-bottom: 1px solid $border-color;
-          background: white;
-          h3 {
-            margin: 0;
-            padding-top: 5px;
-            font-weight: 1000;
-          }
-          p {
-            margin: 0;
-            font-size: 13px;
-          }
-        }
-
-        .cover_container {
-          height: 200px;
-          width: 100%;
-          background: rgb(189, 189, 189);
-          position: relative;
-
-          .profile_pic_container {
-            border: 1px solid $border-color;
-            height: 133.5px;
-            width: 133.5px;
-            border-radius: 50%;
-            position: relative;
-            top: 133.25px;
-            left: 1rem;
-            background: white;
-            img {
-              width: 100%;
-              height: 100%;
-              border-radius: 50%;
-            }
-          }
-        }
-
-        .profile_info_container {
-          padding: 1rem;
-          position: relative;
-          top: 50px;
-          border-bottom: 1px solid $border-color;
-        }
-
-        .posts_container {
-          position: relative;
-          top: 50px;
-        }
-        .cover_image_itself {
-          width: 600px;
-          height: 200px;
-          position: absolute;
-        }
-      }
-
-      .main_content_right_home {
-        width: 350px;
-        .search_bar_home {
-          position: fixed;
-          width: 350px;
-          height: 53px;
-          display: flex;
-          align-items: center;
-          background: white;
-          z-index: 999;
-          .MuiInputBase-root {
-            height: 45px;
-            background-color: lighten($border-color, 6%);
-            border-radius: 20px;
-
-            border: 2px solid $border-color;
-          }
-          .Mui-focused {
-            background-color: white;
-            transition: all 1s;
-            border: 2px solid $secondary-color;
-          }
-          .MuiOutlinedInput-notchedOutline {
-            border: none;
-          }
-        }
-        .you_might_know_home {
-          position: fixed;
-          width: 316px;
-          top: 60px;
-          padding: 0 1rem;
-          border: 1px solid $border-color;
-          background: lighten($border-color, 6%);
-          border-radius: 20px;
-          display: flex;
-          flex-direction: column;
-          a {
-            border-bottom: 1px solid $border-color;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            height: 80px;
-            img {
-              width: 45px;
-              height: 45px;
-              border-radius: 50%;
-            }
-            p {
-              margin: 0;
-            }
-            p:last-child {
-              font-size: 14px;
-            }
-            div {
-              padding-left: 1rem;
-              flex-grow: 2;
-            }
-            button {
-              margin-left: 90px;
-            }
-          }
-          a:last-child {
-            border-bottom: none;
-          }
-          svg {
-            color: $secondary-color;
-          }
-        }
-      }
-    }
-  }
+.posts_container {
+  position: relative;
+  top: 50px;
+}
+.cover_image_itself {
+  width: 600px;
+  height: 200px;
+  position: absolute;
 }

@@ -4,7 +4,7 @@
   background-size: 200%;
   animation: bg-animation 5s infinite alternate;
   height: 894px;
-  padding-top: 75px;
+  padding-top: 50px;
 }
 
 @keyframes bg-animation {
@@ -17,31 +17,15 @@
 }
 
 .create_profile_container {
-  width: 60%;
+  width: 50%;
   margin: auto;
-  .MuiSelect-root {
-    display: flex;
-    align-items: center;
-    height: 40px;
-  }
-  .MuiInputBase-root {
-    background-color: lighten($border-color, 6%);
-    border-radius: 10px;
-    border: 3px solid $border-color;
-  }
-  .Mui-focused {
-    background-color: white;
-    transition: all 1s;
-    border: 3px solid $secondary-color;
-  }
-  .MuiOutlinedInput-notchedOutline {
-    border: none;
-  }
+
   .create_profile_input_container {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     flex-wrap: nowrap;
-    padding: 0 0.1rem 0.75rem 0;
+    padding: 0 0 1rem 0;
   }
   .create_submit_button {
     background: $secondary-color;
@@ -57,4 +41,59 @@
     }
     text-transform: none;
   }
+  .logout_submit_button {
+    background: rgb(122, 1, 1);
+    color: white;
+    font-weight: 600;
+    width: 100px;
+    border: 1px solid rgb(122, 1, 1);
+    font-size: 15px;
+    border-radius: 15px;
+    height: 50px;
+    &:hover {
+      background: rgb(122, 1, 1);
+    }
+    text-transform: none;
+  }
+}
+
+.custom-file-input::-webkit-file-upload-button {
+  display: none;
+}
+.custom-file-input {
+  width: 100%;
+}
+.custom-file-input::before {
+  content: 'Upload image';
+  display: inline-block;
+  background: $secondary-color;
+  margin: 5px 5px 0 0;
+  border-radius: 15px;
+  font-size: 15px;
+  padding: 1rem;
+  outline: none;
+  font-weight: 600;
+  cursor: pointer;
+  color: white;
+}
+.custom-file-input:active {
+  border: none;
+  outline: none;
+}
+.custom-file-input:focus {
+  border: none;
+  outline: none;
+}
+
+.custom-file-input:hover::before {
+  border: none;
+}
+.custom-file-input:active::before {
+  border: none;
+  outline: none;
+}
+
+.buttons_container_create_profile {
+  display: flex;
+  justify-content: space-between;
 }

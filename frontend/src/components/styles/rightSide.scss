@@ -1,0 +1,71 @@
+@import '../../screens/styles/config';
+
+.main_content_right {
+  width: 350px;
+  .search_bar {
+    position: fixed;
+    width: 350px;
+    height: 53px;
+    display: flex;
+    align-items: center;
+    background: white;
+    z-index: 999;
+    .MuiInputBase-root {
+      height: 45px;
+      background-color: lighten($border-color, 6%);
+      border-radius: 20px;
+
+      border: 2px solid $border-color;
+    }
+    .Mui-focused {
+      background-color: white;
+      transition: all 1s;
+      border: 2px solid $secondary-color;
+    }
+    .MuiOutlinedInput-notchedOutline {
+      border: none;
+    }
+  }
+  .you_might_know {
+    position: fixed;
+    width: 316px;
+    top: 60px;
+    padding: 0 1rem;
+    border: 1px solid $border-color;
+    background: lighten($border-color, 6%);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    a {
+      border-bottom: 1px solid $border-color;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      height: 80px;
+      img {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+      }
+      p {
+        margin: 0;
+      }
+      p:last-child {
+        font-size: 14px;
+      }
+      div {
+        padding-left: 1rem;
+        flex-grow: 2;
+      }
+      button {
+        margin-left: 90px;
+      }
+    }
+    a:last-child {
+      border-bottom: none;
+    }
+    svg {
+      color: $secondary-color;
+    }
+  }
+}

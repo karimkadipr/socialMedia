@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { registerUser } from '../user/userActions'
 import { OutlinedInput, Button } from '@material-ui/core'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import IconButton from '@material-ui/core/IconButton'
 import Visibility from '@material-ui/icons/Visibility'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
+import ErrorSuccess from '../components/ErrorSuccess'
 import './styles/signupscreen.scss'
 
 const SignUpScreen = ({ history }) => {
@@ -54,7 +54,11 @@ const SignUpScreen = ({ history }) => {
       <div className='right_side_screen'>
         <div className='sign_up_screen_container'>
           <h3>Join us !</h3>
-          {error && <div>{error}</div>}
+          {error && (
+            <ErrorSuccess color='red'>
+              This email or pseudo already exist
+            </ErrorSuccess>
+          )}
           <form className='form_sign_up' onSubmit={handleSubmit}>
             <div>
               <OutlinedInput
@@ -77,7 +81,7 @@ const SignUpScreen = ({ history }) => {
               <OutlinedInput
                 type='text'
                 onChange={(e) => setPseudo(e.target.value)}
-                placeholder='Enter your Name'
+                placeholder='Enter your Pseudo (must be unique)'
                 fullWidth={true}
               />
             </div>

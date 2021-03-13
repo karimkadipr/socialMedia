@@ -128,7 +128,7 @@ const getMyProfile = () => async (dispatch, getState) => {
   }
 }
 
-const getAllProfiles = () => async (dispatch, getState) => {
+const getAllProfiles = (keyword = '') => async (dispatch, getState) => {
   try {
     dispatch({
       type: GET_ALL_PROFILE_REQUEST,
@@ -145,7 +145,10 @@ const getAllProfiles = () => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.get('/api/profile/all', config)
+    const { data } = await axios.get(
+      `/api/profile/all?keyword=${keyword}`,
+      config
+    )
 
     dispatch({
       type: GET_ALL_PROFILE_SUCCESS,

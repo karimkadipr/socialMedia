@@ -229,11 +229,23 @@ const unFollowAProfile = asyncHandler(async (req, res) => {
 
 const getAllProfiles = asyncHandler(async (req, res) => {
   const userId = req.user
-  let profiles = await Profile.find({}).populate(
-    'user',
-    'id name pseudo avatar'
-  )
+  const keyword = req.query.keyword
+    ? {
+        name: {
+          $regex: req.query.keyword,
+          $options: 'i',
+        },
+      }
+    : {}
 
+  let users = await User.find({ ...keyword })
+  console.log(users)
+  let usersId = users.map((user) => user._id)
+
+  let profiles = await Profile.find({ user: { $in: usersId } }).populate(
+    'user',
+    'id name pseudo'
+  )
   if (profiles) {
     profiles = profiles.filter((profile) => !profile.user._id.equals(userId))
     res.status(200).json(profiles)

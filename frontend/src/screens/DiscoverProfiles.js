@@ -2,59 +2,35 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { getAllProfiles } from '../profile/profileActions'
-import { logout } from '../user/userActions'
-import { IconButton, OutlinedInput, InputBase, Button } from '@material-ui/core'
-import MoreIcon from '@material-ui/icons/More'
-import TwitterIcon from '@material-ui/icons/Twitter'
-import { ReactComponent as ProfileSvg } from './images/man.svg'
-import { ReactComponent as HomeSvg } from './images/house.svg'
-import { ReactComponent as TelescopeSvg } from './images/telescope.svg'
+import { Button } from '@material-ui/core'
+import RightSide from '../components/RightSide'
 import './styles/discoverProfiles.scss'
+import './styles/layout.scss'
+import LeftSide from '../components/LeftSide'
 
-const DiscoverProfiles = ({ history }) => {
+const DiscoverProfiles = ({ match }) => {
+  const keyword = match.params.keyword
+
   const dispatch = useDispatch()
 
   const getAllProfilesValues = useSelector((state) => state.getAllProfiles)
   const { profiles } = getAllProfilesValues
 
   useEffect(() => {
-    dispatch(getAllProfiles())
-  }, [dispatch])
+    dispatch(getAllProfiles(keyword))
+  }, [dispatch, keyword])
 
-  const handleLogout = () => {
-    dispatch(logout())
-    history.push('/login')
-  }
   return (
-    <div className='content_container_home'>
-      <div className='left_container_home'>
-        <div className='list_container_home'>
-          <div className='fixed_sidebar_profile_home'>
-            <Link to='/'>
-              <IconButton>
-                <TwitterIcon />
-              </IconButton>
-            </Link>
-            <Link to='/'>
-              <HomeSvg /> Home
-            </Link>
-            <Link to='/profile'>
-              <ProfileSvg /> Profile
-            </Link>
-            <Link to='/profiles'>
-              <TelescopeSvg /> Discover
-            </Link>
-
-            <button onClick={() => history.push('/')} className='btn-main'>
-              Post
-            </button>
-          </div>
+    <div className='content_container'>
+      <div className='left_container'>
+        <div className='list_container'>
+          <LeftSide post />
         </div>
       </div>
-      <div className='right_container_home'>
-        <div className='main_content_home'>
-          <div className='main_content_left_home'>
-            <div className='Home_Title_home'>
+      <div className='right_container'>
+        <div className='main_content'>
+          <div className='main_content_left'>
+            <div className='Home_Title'>
               <h3>Connect</h3>
             </div>
             <div className='suggestion_all_users'>
@@ -86,35 +62,7 @@ const DiscoverProfiles = ({ history }) => {
                 ))}
             </div>
           </div>
-          <div className='main_content_right_home'>
-            <div className='search_bar_home'>
-              <OutlinedInput
-                type='text'
-                placeholder='Enter your Name'
-                fullWidth={true}
-              />
-            </div>
-            <div className='you_might_know_home'>
-              <div className='who_to_follow'> Who to follow</div>
-              {profiles &&
-                profiles.slice(0, 5).map((profile) => (
-                  <Link key={profile._id} to={`/profile/${profile._id}`}>
-                    <img
-                      src='/images/empty_profile_pic.jpg'
-                      alt='No profil pic'
-                    />
-                    <div>
-                      <p>{profile.user.name}</p>
-                      <p>@{profile.user.pseudo}</p>
-                    </div>
-
-                    <IconButton>
-                      <MoreIcon />
-                    </IconButton>
-                  </Link>
-                ))}
-            </div>
-          </div>
+          <RightSide profiles={profiles} />
         </div>
       </div>
     </div>

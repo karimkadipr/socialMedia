@@ -21,7 +21,7 @@ import {
   getPostsByProfile,
 } from '../post/postActions'
 import './styles/profile.scss'
-import TwitterIcon from '@material-ui/icons/Twitter'
+import './styles/layout.scss'
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace'
 import PhoneIcon from '@material-ui/icons/Phone'
 import CakeIcon from '@material-ui/icons/Cake'
@@ -31,12 +31,10 @@ import {
 } from '../profile/profileConstants'
 import { GET_POSTS_BY_PROFILE_RESET } from '../post/postConstants'
 import Post from '../components/Post'
-import MoreIcon from '@material-ui/icons/More'
 import dateFormat from 'dateformat'
 import { ReactComponent as NoPostSvg } from './images/undraw_Posts_re_ormv.svg'
-import { ReactComponent as ProfileSvg } from './images/man.svg'
-import { ReactComponent as HomeSvg } from './images/house.svg'
-import { ReactComponent as TelescopeSvg } from './images/telescope.svg'
+import RightSide from '../components/RightSide'
+import LeftSide from '../components/LeftSide'
 
 const Profile = ({ history, match }) => {
   const profileId = match.params.id
@@ -174,25 +172,7 @@ const Profile = ({ history, match }) => {
     <div className='content_container'>
       <div className='left_container'>
         <div className='list_container'>
-          <div className='fixed_sidebar_profile'>
-            <Link to='/'>
-              <IconButton>
-                <TwitterIcon />
-              </IconButton>
-            </Link>
-            <Link to='/'>
-              <HomeSvg /> Home
-            </Link>
-            <Link to='/profile'>
-              <ProfileSvg /> Profile
-            </Link>
-            <Link to='/profiles'>
-              <TelescopeSvg /> Discover
-            </Link>
-            <button onClick={() => history.push('/')} className='btn-main'>
-              Post
-            </button>
-          </div>
+          <LeftSide post />
         </div>
       </div>
       <div className='right_container'>
@@ -360,43 +340,7 @@ const Profile = ({ history, match }) => {
               )}
             </div>
           </div>
-          <div className='main_content_right_home'>
-            <div className='search_bar_home'>
-              <OutlinedInput
-                type='text'
-                placeholder='Enter your Name'
-                fullWidth={true}
-              />
-            </div>
-            <div className='you_might_know_home'>
-              <div className='who_to_follow'> Who to follow</div>
-              {profiles.slice(0, 5).map((profile) => (
-                <Link
-                  key={profile._id}
-                  to={`/profile/${profile._id}`}
-                  onClick={handleChangeLink}>
-                  {profile.avatar ? (
-                    <img src={profile.avatar} alt='No profil pic' />
-                  ) : (
-                    <img
-                      src='/images/empty_profile_pic.jpg'
-                      alt='No profil pic'
-                    />
-                  )}
-                  <div>
-                    <p>{profile.user.name}</p>
-                    <p>@{profile.user.pseudo}</p>
-                  </div>
-                  <IconButton>
-                    <MoreIcon />
-                  </IconButton>
-                </Link>
-              ))}
-              <div className='who_to_follow'>
-                <Link to='/profiles'>Show more</Link>
-              </div>
-            </div>
-          </div>
+          <RightSide profiles={profiles} showMore />
         </div>
       </div>
     </div>

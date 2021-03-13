@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { userLogin } from '../user/userActions'
-import { Link } from 'react-router-dom'
 import { OutlinedInput, Button } from '@material-ui/core'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import IconButton from '@material-ui/core/IconButton'
 import Visibility from '@material-ui/icons/Visibility'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
+import ErrorSuccess from '../components/ErrorSuccess'
+import './styles/signupscreen.scss'
 
 const LoginScreen = ({ history }) => {
   const [showPassword, setShowPassword] = useState(false)
@@ -40,7 +41,9 @@ const LoginScreen = ({ history }) => {
       <div className='right_side_screen'>
         <div className='sign_up_screen_container'>
           <h3>Log In!</h3>
-          {error && <div>{error}</div>}
+          {error && (
+            <ErrorSuccess color='red'>User does not exist</ErrorSuccess>
+          )}
           <form className='form_sign_up' onSubmit={handleSubmit}>
             <div>
               <OutlinedInput

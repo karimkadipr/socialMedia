@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { getMyProfile } from '../profile/profileActions'
 import {
@@ -26,6 +27,7 @@ const EditProfile = ({ history }) => {
   const [avatar, setAvatar] = useState('')
   const [coverImage, setCoverImage] = useState('')
   const [website, setWebsite] = useState('')
+  const [uploading, setUploading] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -89,6 +91,46 @@ const EditProfile = ({ history }) => {
         country,
       })
     )
+  }
+
+  const uploadFileHandlerAvatar = async (e) => {
+    const file = e.target.files[0]
+    const formData = new FormData()
+    formData.append('image', file)
+    setUploading(true)
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+      const { data } = await axios.post('/api/upload/avatar', formData, config)
+      setAvatar(data)
+      setUploading(false)
+    } catch (error) {
+      console.error(error)
+      setUploading(false)
+    }
+  }
+
+  const uploadFileHandlerCover = async (e) => {
+    const file = e.target.files[0]
+    const formData = new FormData()
+    formData.append('image', file)
+    setUploading(true)
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+      const { data } = await axios.post('/api/upload/cover', formData, config)
+      setCoverImage(data)
+      setUploading(false)
+    } catch (error) {
+      console.error(error)
+      setUploading(false)
+    }
   }
 
   return (
@@ -163,7 +205,13 @@ const EditProfile = ({ history }) => {
                 placeholder='Enter your Avatar Image'
                 fullWidth={true}
               />
-              <button>Upload</button>
+              <input
+                className='custom-file-input'
+                type='file'
+                id='img'
+                name='img'
+                onChange={uploadFileHandlerAvatar}
+              />
             </div>
 
             <div style={{ width: '45%' }}>
@@ -174,7 +222,13 @@ const EditProfile = ({ history }) => {
                 placeholder='Enter your Cover Image'
                 fullWidth={true}
               />
-              <button>Upload</button>
+              <input
+                className='custom-file-input'
+                type='file'
+                id='img'
+                name='img'
+                onChange={uploadFileHandlerCover}
+              />
             </div>
           </div>
           <InputLabel id='demo-simple-select-label'>Bio</InputLabel>

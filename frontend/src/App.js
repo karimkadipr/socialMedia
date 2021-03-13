@@ -22,6 +22,7 @@ function App() {
         <Route path='/profile' component={Profile} exact />
         <Route path='/profile/:id' component={OthersProfile} exact />
         <Route path='/profiles' component={DiscoverProfiles} exact />
+        <Route path='/profiles/:keyword' component={DiscoverProfiles} exact />
         <Route path='/:pseudo/:postId' component={PostDetails} exact />
       </Switch>
     </Router>
