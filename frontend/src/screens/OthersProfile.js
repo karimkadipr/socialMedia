@@ -169,6 +169,9 @@ const Profile = ({ history, match }) => {
     dispatch({
       type: GET_PROFILE_BY_ID_RESET,
     })
+    dispatch({
+      type: GET_POSTS_BY_PROFILE_RESET,
+    })
   }
 
   return (
