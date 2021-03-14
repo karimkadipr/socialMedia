@@ -15,6 +15,7 @@ import {
   Button,
 } from '@material-ui/core'
 import { updateProfile } from '../profile/profileActions'
+import ErrorSuccess from '../components/ErrorSuccess'
 import './styles/createProfile.scss'
 
 const EditProfile = ({ history }) => {
@@ -38,7 +39,11 @@ const EditProfile = ({ history }) => {
   const { profileInfo } = getMyProfileValue
 
   const updateProfileValue = useSelector((state) => state.updateProfile)
-  const { profileInfoUpdated, success: updateSuccess } = updateProfileValue
+  const {
+    profileInfoUpdated,
+    success: updateSuccess,
+    error,
+  } = updateProfileValue
 
   useEffect(() => {
     if (!userInfo) {
@@ -137,7 +142,7 @@ const EditProfile = ({ history }) => {
     <div className='the_hole_create_profile_page'>
       <div className='create_profile_container'>
         <h1>Edit your profile </h1>
-
+        {error && <ErrorSuccess> Pseudo already taken </ErrorSuccess>}
         <form onSubmit={handleSubmit}>
           <InputLabel id='demo-simple-select-label'>Name</InputLabel>
           <div className='create_profile_input_container'>
