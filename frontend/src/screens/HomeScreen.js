@@ -29,10 +29,10 @@ const HomeScreen = ({ history }) => {
   const [text, setText] = useState('')
 
   const getMyProfileValue = useSelector((state) => state.getMyProfile)
-  const { profileInfo, error: getMyProfileError } = getMyProfileValue
+  const { loading, profileInfo, error } = getMyProfileValue
 
   const userLogin = useSelector((state) => state.userLogin)
-  const { error, userInfo } = userLogin
+  const { userInfo } = userLogin
 
   const getPostsForHomePageValue = useSelector(
     (state) => state.getPostsForHomePage
@@ -58,19 +58,17 @@ const HomeScreen = ({ history }) => {
   const { success: addPostSuccess } = addPostValues
 
   useEffect(() => {
-    if (getMyProfileError) {
+    if (!profileInfo) {
+      dispatch(getMyProfile())
+    }
+    if (error && profileInfo) {
       history.push('/createprofile')
     }
     if (!userInfo) {
       history.push('/login')
     }
-    if (error) {
-      history.push('/createprofile')
-    }
-    if (!profileInfo) {
-      dispatch(getMyProfile())
-    }
-    if (profiles && profiles.length === 0) {
+
+    if (!profiles || (profiles && profiles.length === 0)) {
       dispatch(getAllProfiles())
     }
     if (
@@ -94,7 +92,7 @@ const HomeScreen = ({ history }) => {
     addCommentSuccess,
     profileInfo,
     addPostSuccess,
-    getMyProfileError,
+    error,
   ])
 
   useEffect(() => {
