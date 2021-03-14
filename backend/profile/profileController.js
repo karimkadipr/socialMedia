@@ -72,6 +72,7 @@ const updateProfile = asyncHandler(async (req, res) => {
   )
   const user = await User.findOne({ _id: req.user })
   const posts = await Post.find({ user: userId })
+  let AllPosts = await Post.find({})
 
   if (user) {
     user.name = name || user.name
@@ -104,25 +105,33 @@ const updateProfile = asyncHandler(async (req, res) => {
         (post.avatar = profile.avatar)
       )
     )
-    posts.map((post) =>
-      post.likes.map(
-        (like) => (
-          (like.name = user.name),
-          (like.pseudo = user.pseudo),
-          (like.avatar = profile.avatar)
-        )
-      )
-    )
-    posts.map((post) =>
-      post.comments.map(
-        (comment) => (
-          (comment.name = user.name),
-          (comment.pseudo = user.pseudo),
-          (comment.avatar = profile.avatar)
-        )
-      )
-    )
     posts.map(asyncHandler(async (post) => await post.save()))
+
+    AllPosts.map((post) =>
+      post.likes.map((like) => {
+        if (like.user.equals(userId)) {
+          return (
+            (like.name = user.name),
+            (like.pseudo = user.pseudo),
+            (like.avatar = profile.avatar)
+          )
+        }
+      })
+    )
+
+    AllPosts.map((post) =>
+      post.comments.map((comment) => {
+        if (comment.user.equals(userId)) {
+          return (
+            (comment.name = user.name),
+            (comment.pseudo = user.pseudo),
+            (comment.avatar = profile.avatar)
+          )
+        }
+      })
+    )
+
+    AllPosts.map(asyncHandler(async (post) => await post.save()))
   }
 
   res.status(200).json(profile)

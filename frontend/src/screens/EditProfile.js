@@ -142,7 +142,9 @@ const EditProfile = ({ history }) => {
     <div className='the_hole_create_profile_page'>
       <div className='create_profile_container'>
         <h1>Edit your profile </h1>
-        {error && <ErrorSuccess> Pseudo already taken </ErrorSuccess>}
+        {error && (
+          <ErrorSuccess color='red'> Pseudo already taken </ErrorSuccess>
+        )}
         <form onSubmit={handleSubmit}>
           <InputLabel id='demo-simple-select-label'>Name</InputLabel>
           <div className='create_profile_input_container'>
