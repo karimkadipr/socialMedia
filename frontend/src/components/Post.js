@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { fromSeconds } from 'from-seconds'
 import { IconButton, InputBase, Button } from '@material-ui/core'
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble'
@@ -7,9 +8,11 @@ import ShareIcon from '@material-ui/icons/Share'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
 import DeleteIcon from '@material-ui/icons/Delete'
+import Linkify from 'react-linkify'
 import './styles/post.scss'
 
 const Post = ({
+  history,
   myAvatar,
   OthersAvatar,
   children,
@@ -61,7 +64,7 @@ const Post = ({
   return (
     <div className='post_biggest_container'>
       <div>
-        <Link to={`/${pseudo}/${postId}`} className='post_container'>
+        <a href={`/${pseudo}/${postId}`} className='post_container'>
           <div className='profile_pic_post_container'>
             <div className='profile_pic_post'>
               {myAvatar ? (
@@ -79,9 +82,13 @@ const Post = ({
               <span>@{pseudo}</span>
               <span>{timeToDisplay}</span>
             </p>
-            <p>{children}</p>
+            <Linkify>
+              <object className='text_of_the_post' type='owo/uwu'>
+                {children}
+              </object>
+            </Linkify>
           </div>
-        </Link>
+        </a>
       </div>
       <div className='icons_post'>
         <div className='icon_post'>
@@ -134,4 +141,4 @@ const Post = ({
   )
 }
 
-export default Post
+export default withRouter(Post)

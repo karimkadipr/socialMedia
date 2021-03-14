@@ -17,6 +17,7 @@ import {
   deleteLikePostById,
   getCommentsPost,
 } from '../post/postActions'
+import Linkify from 'react-linkify'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import { GET_ANY_POST_RESET } from '../post/postConstants'
@@ -185,7 +186,9 @@ const PostDetails = ({ history, match }) => {
                     </div>
                   </Link>
                   <div className='post_text_image_container'>
-                    <p>{post.text}</p>
+                    <Linkify>
+                      <p>{post.text}</p>
+                    </Linkify>
                   </div>
                   <div className='date_post'>
                     {dateFormat(
@@ -223,8 +226,8 @@ const PostDetails = ({ history, match }) => {
                 {open && (
                   <div>
                     <Comment
-                      name={userInfo.name}
-                      pseudo={userInfo.pseudo}
+                      name={profileInfo.user.name}
+                      pseudo={profileInfo.user.pseudo}
                       avatar={profileInfo.avatar}>
                       <div className='write_new_comment_post_screen'>
                         <InputBase

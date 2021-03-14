@@ -1,6 +1,7 @@
 import React from 'react'
 import { IconButton } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
+import Linkify from 'react-linkify'
 import './styles/comment.scss'
 
 const Comment = ({
@@ -40,7 +41,9 @@ const Comment = ({
           </div>
         </div>
 
-        <p>{children}</p>
+        <Linkify>
+          <p>{children}</p>
+        </Linkify>
       </div>
     </div>
   )

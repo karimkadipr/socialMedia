@@ -6,7 +6,7 @@
   border-bottom: 1px solid $border-color;
 }
 .post_container {
-  position: relative;
+  z-index: 0;
   padding: 0.5rem 1rem;
   display: flex;
   padding-bottom: 55px;
@@ -14,6 +14,7 @@
   &:hover {
     background: lighten($border-color, 5%);
   }
+  cursor: pointer;
 }
 
 .profile_pic_post_container {
@@ -97,5 +98,13 @@
       background: $secondary-color;
     }
     text-transform: none;
+  }
+}
+.text_of_the_post {
+  a {
+    color: $links-color;
+  }
+  a:hover {
+    text-decoration: underline;
   }
 }

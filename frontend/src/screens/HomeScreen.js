@@ -180,6 +180,7 @@ const HomeScreen = ({ history }) => {
                   placeholder='What is happening?'
                   inputProps={{ 'aria-label': 'naked' }}
                 />
+
                 <button onClick={handleAddPost} className='btn-main'>
                   Post
                 </button>

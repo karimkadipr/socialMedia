@@ -126,6 +126,12 @@
               font-size: 25px;
               margin: 0.5rem 0;
             }
+            a {
+              color: $links-color;
+            }
+            a:hover {
+              text-decoration: underline;
+            }
           }
           .date_post {
             font-size: 15px;
