@@ -16,6 +16,9 @@
       p:nth-child(2) {
         color: $small-text-color;
       }
+      p:nth-child(3) {
+        color: $text-color;
+      }
     }
     .see_profile {
       background: $secondary-color;
@@ -41,6 +44,9 @@
       }
       p:nth-child(2) {
         color: $small-text-color-dark;
+      }
+      p:nth-child(3) {
+        color: $text-color-dark;
       }
     }
     .see_profile {
