@@ -22,28 +22,39 @@
     }
 
     .edit_profile_button {
-      font-weight: 1000;
-      font-size: 13px;
+      .MuiButton-label {
+        margin: 0;
+      }
+      text-align: center;
+      font-weight: 700;
+      font-size: 15px;
       border: 1px solid $secondary-color;
       border-radius: 18px;
-      height: 50px;
+      height: 38px;
       text-transform: none;
+      padding: 0 1rem;
     }
     .unfollow_button_profile {
-      font-weight: 1000;
-      font-size: 13px;
-
+      .MuiButton-label {
+        margin: 0;
+      }
+      font-weight: 700;
+      font-size: 15px;
       border-radius: 18px;
-      height: 50px;
-
+      height: 38px;
       text-transform: none;
+      padding: 0 1rem;
     }
     .follow_button_profile {
-      font-weight: 1000;
-      font-size: 13px;
+      .MuiButton-label {
+        margin: 0;
+      }
+      font-weight: 700;
+      font-size: 15px;
       border-radius: 15px;
-      height: 50px;
+      height: 38px;
       text-transform: none;
+      padding: 0 1rem;
     }
   }
   p:first-child {
@@ -135,7 +146,7 @@
       background: white;
     }
   }
-  .unfollow_button_profile {
+  .follow_button_profile {
     background: white;
     color: $secondary-color;
     border: 1px solid $secondary-color;
@@ -143,7 +154,7 @@
       background: white;
     }
   }
-  .follow_button_profile {
+  .unfollow_button_profile {
     background: $secondary-color;
     color: white;
 
@@ -182,7 +193,7 @@
       background: black;
     }
   }
-  .unfollow_button_profile {
+  .follow_button_profile {
     background: black;
     color: $secondary-color;
     border: 1px solid $secondary-color;
@@ -190,12 +201,12 @@
       background: black;
     }
   }
-  .follow_button_profile {
-    background: black;
-    color: $secondary-color;
+  .unfollow_button_profile {
+    background: $secondary-color;
+    color: white;
     border: 1px solid $secondary-color;
     &:hover {
-      background: black;
+      background: $secondary-color;
     }
   }
   .cover_container {

@@ -255,7 +255,7 @@ const Profile = ({ history, match }) => {
                             className='unfollow_button_profile'
                             variant='outlined'
                             onClick={() => handleFollow()}>
-                            UnFollow
+                            Following
                           </Button>
                         ) : (
                           <Button
