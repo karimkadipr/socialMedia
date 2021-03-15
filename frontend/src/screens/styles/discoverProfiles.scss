@@ -1,13 +1,63 @@
 @import './config';
 @import './button';
 
+.content_container_color_light {
+  .suggestion_all_users {
+    border-bottom: 1px solid $border-color;
+  }
+  .users_container_discover {
+    a {
+      border-bottom: 1px solid $border-color;
+    }
+    .username_pseudo {
+      p:first-child {
+        color: $text-color;
+      }
+      p:nth-child(2) {
+        color: $small-text-color;
+      }
+    }
+    .see_profile {
+      background: $secondary-color;
+      border: 1px solid $secondary-color;
+      &:hover {
+        background: $secondary-color;
+      }
+    }
+  }
+}
+
+.content_container_color_dark {
+  .suggestion_all_users {
+    border-bottom: 1px solid $dark-border-color;
+  }
+  .users_container_discover {
+    a {
+      border-bottom: 1px solid $dark-border-color;
+    }
+    .username_pseudo {
+      p:first-child {
+        color: $text-color-dark;
+      }
+      p:nth-child(2) {
+        color: $small-text-color-dark;
+      }
+    }
+    .see_profile {
+      background: $secondary-color;
+      border: 1px solid $secondary-color;
+      &:hover {
+        background: $secondary-color;
+      }
+    }
+  }
+}
+
 .suggestion_all_users {
   display: flex;
   align-items: center;
   padding-left: 1rem;
-
   height: 53px;
-  border-bottom: 1px solid $border-color;
   h3 {
     margin: 0;
     font-weight: 1000;
@@ -27,7 +77,6 @@
     display: flex;
     justify-content: space-between;
     padding: 1rem;
-    border-bottom: 1px solid $border-color;
     button {
       max-height: 40px;
     }
@@ -41,7 +90,6 @@
     p:nth-child(2) {
       margin: 0;
       font-size: 12px;
-      color: $small-text-color;
     }
     p:nth-child(3) {
       margin: 0;
@@ -55,16 +103,11 @@
   }
 
   .see_profile {
-    background: $secondary-color;
     color: white;
     font-weight: 600;
-    border: 1px solid $secondary-color;
     font-size: 13px;
     border-radius: 15px;
     height: 50px;
-    &:hover {
-      background: $secondary-color;
-    }
     text-transform: none;
   }
 }

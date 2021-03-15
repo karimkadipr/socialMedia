@@ -7,16 +7,11 @@ import {
   UPDATE_PROFILE_RESET,
 } from '../profile/profileConstants'
 import { GET_MY_POST_RESET } from '../post/postConstants'
-import {
-  OutlinedInput,
-  InputLabel,
-  Select,
-  MenuItem,
-  Button,
-} from '@material-ui/core'
+import { OutlinedInput, InputLabel, Button } from '@material-ui/core'
 import { updateProfile } from '../profile/profileActions'
 import ErrorSuccess from '../components/ErrorSuccess'
 import './styles/createProfile.scss'
+import classNames from 'classnames'
 
 const EditProfile = ({ history }) => {
   const [name, setName] = useState('')
@@ -37,6 +32,9 @@ const EditProfile = ({ history }) => {
 
   const getMyProfileValue = useSelector((state) => state.getMyProfile)
   const { profileInfo } = getMyProfileValue
+
+  const darkModeValue = useSelector((state) => state.darkMode)
+  const { darkMode } = darkModeValue
 
   const updateProfileValue = useSelector((state) => state.updateProfile)
   const {
@@ -138,8 +136,16 @@ const EditProfile = ({ history }) => {
     }
   }
 
+  const profilePageStyle = classNames(
+    'the_hole_create_profile_page',
+    'the_hole_create_profile_page_light'
+  )
+  const profilePageStyleDark = classNames(
+    'the_hole_create_profile_page',
+    'the_hole_create_profile_page_dark'
+  )
   return (
-    <div className='the_hole_create_profile_page'>
+    <div className={darkMode ? profilePageStyleDark : profilePageStyle}>
       <div className='create_profile_container'>
         <h1>Edit your profile </h1>
         {error && (

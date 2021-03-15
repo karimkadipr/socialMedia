@@ -17,6 +17,7 @@ import {
 import { logout } from '../user/userActions'
 import { createProfile } from '../profile/profileActions'
 import ErrorMessage from '../components/ErrorSuccess'
+import classNames from 'classnames'
 import './styles/createProfile.scss'
 
 const CreateProfile = ({ history }) => {
@@ -36,6 +37,9 @@ const CreateProfile = ({ history }) => {
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
+
+  const darkModeValue = useSelector((state) => state.darkMode)
+  const { darkMode } = darkModeValue
 
   const createProfileValue = useSelector((state) => state.createProfile)
   const { profileInfo, error } = createProfileValue
@@ -145,8 +149,17 @@ const CreateProfile = ({ history }) => {
     history.push('/login')
   }
 
+  const profilePageStyle = classNames(
+    'the_hole_create_profile_page',
+    'the_hole_create_profile_page_light'
+  )
+  const profilePageStyleDark = classNames(
+    'the_hole_create_profile_page',
+    'the_hole_create_profile_page_dark'
+  )
+
   return (
-    <div className='the_hole_create_profile_page'>
+    <div className={darkMode ? profilePageStyleDark : profilePageStyle}>
       <div className='create_profile_container'>
         <h1>Create your profile !</h1>
         <form onSubmit={handleSubmit}>

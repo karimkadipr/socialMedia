@@ -23,6 +23,7 @@ import dateFormat from 'dateformat'
 import { ReactComponent as NoPostSvg } from './images/undraw_Posts_re_ormv.svg'
 import RightSide from '../components/RightSide'
 import LeftSide from '../components/LeftSide'
+import classNames from 'classnames'
 
 const Profile = ({ history }) => {
   const dispatch = useDispatch()
@@ -52,6 +53,18 @@ const Profile = ({ history }) => {
   const getAllProfilesValue = useSelector((state) => state.getAllProfiles)
   const { profiles } = getAllProfilesValue
 
+  const darkModeValue = useSelector((state) => state.darkMode)
+  const { darkMode } = darkModeValue
+
+  const containerStyle = classNames(
+    'content_container',
+    'content_container_color_light'
+  )
+
+  const containerStyleDark = classNames(
+    'content_container',
+    'content_container_color_dark'
+  )
   useEffect(() => {
     if (!userInfo) {
       history.push('/login')
@@ -107,7 +120,7 @@ const Profile = ({ history }) => {
     dispatch(commentPostById(comment, id))
   }
   return (
-    <div className='content_container'>
+    <div className={darkMode ? containerStyleDark : containerStyle}>
       <div className='left_container'>
         <div className='list_container'>
           <LeftSide post />
@@ -154,7 +167,10 @@ const Profile = ({ history }) => {
               {profileInfo && (
                 <>
                   <div className='name_button'>
-                    <p>{profileInfo.user.name}</p>
+                    <div className='name_pseudo_container'>
+                      <p>{profileInfo.user.name}</p>
+                      <p>@{profileInfo.user.pseudo}</p>
+                    </div>
                     <Button
                       className='edit_profile_button'
                       onClick={() => {
@@ -218,13 +234,13 @@ const Profile = ({ history }) => {
                         style={{ paddingTop: 8 }}
                         className='info_container_one'>
                         <span style={{ paddingRight: '1rem' }}>
-                          <span style={{ fontWeight: '700' }}>
+                          <span style={{ fontWeight: '700', color: 'white' }}>
                             {profileInfo.subscriptions.length}
                           </span>
                           Following
                         </span>
                         <span>
-                          <span style={{ fontWeight: '700' }}>
+                          <span style={{ fontWeight: '700', color: 'white' }}>
                             {profileInfo.subscribers.length}
                           </span>
                           Followers

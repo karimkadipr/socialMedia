@@ -7,6 +7,7 @@ import IconButton from '@material-ui/core/IconButton'
 import Visibility from '@material-ui/icons/Visibility'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import ErrorSuccess from '../components/ErrorSuccess'
+import classNames from 'classnames'
 import './styles/signupscreen.scss'
 
 const SignUpScreen = ({ history }) => {
@@ -25,6 +26,9 @@ const SignUpScreen = ({ history }) => {
 
   const userRegister = useSelector((state) => state.userRegister)
   const { error } = userRegister
+
+  const darkModeValue = useSelector((state) => state.darkMode)
+  const { darkMode } = darkModeValue
 
   useEffect(() => {
     if (userInfo) {
@@ -45,9 +49,10 @@ const SignUpScreen = ({ history }) => {
   const handleClickShowConfirmPassword = () => {
     setShowConfirmPassword(!showConfirmPassword)
   }
-
+  const loginSignUpStyle = classNames('hole_screen', 'hole_screen_light')
+  const loginSignUpStyleDark = classNames('hole_screen', 'hole_screen_dark')
   return (
-    <div className='hole_screen'>
+    <div className={darkMode ? loginSignUpStyleDark : loginSignUpStyle}>
       <div className='left_side_screen'>
         <img src='./images/lohp_en_1302x955.png' alt='Nothing loaded' />
       </div>

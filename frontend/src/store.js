@@ -26,7 +26,7 @@ import {
   isLikedPostReducer,
   deleteCommentReducer,
 } from './post/postReducer'
-
+import { darkModeReducer } from './darkmode/darkmodeReducer'
 const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
@@ -50,6 +50,7 @@ const reducer = combineReducers({
   isLikedPost: isLikedPostReducer,
   deleteComment: deleteCommentReducer,
   updateProfile: updateProfileReducer,
+  darkMode: darkModeReducer,
 })
 
 const userLoginFromStorage = localStorage.getItem('userInfo')
@@ -60,12 +61,19 @@ const commentFromStorage = localStorage.getItem('userComments')
   ? JSON.parse(localStorage.getItem('userComments'))
   : []
 
+const darkModeFromStorage = localStorage.getItem('darkMode')
+  ? localStorage.getItem('darkMode')
+  : false
+
 const initialState = {
   userLogin: {
     userInfo: userLoginFromStorage,
   },
   getCommentsPost: {
     comments: commentFromStorage,
+  },
+  darkMode: {
+    darkMode: darkModeFromStorage,
   },
 }
 

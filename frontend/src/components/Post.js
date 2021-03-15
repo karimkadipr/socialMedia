@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { fromSeconds } from 'from-seconds'
 import { IconButton, InputBase, Button } from '@material-ui/core'
@@ -9,10 +9,10 @@ import FavoriteIcon from '@material-ui/icons/Favorite'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
 import DeleteIcon from '@material-ui/icons/Delete'
 import Linkify from 'react-linkify'
+import classNames from 'classnames'
 import './styles/post.scss'
 
 const Post = ({
-  history,
   myAvatar,
   OthersAvatar,
   children,
@@ -61,8 +61,26 @@ const Post = ({
     setOpen(false)
   }
 
+  const handleKeypress = (e) => {
+    if (e.keyCode === 13) {
+      handleSubmit()
+    }
+  }
+
+  const darkModeValue = useSelector((state) => state.darkMode)
+  const { darkMode } = darkModeValue
+
+  const postStyle = classNames(
+    'post_biggest_container',
+    'post_biggest_container_light'
+  )
+  const postStyleDark = classNames(
+    'post_biggest_container',
+    'post_biggest_container_dark'
+  )
+
   return (
-    <div className='post_biggest_container'>
+    <div className={darkMode ? postStyleDark : postStyle}>
       <div>
         <a href={`/${pseudo}/${postId}`} className='post_container'>
           <div className='profile_pic_post_container'>
@@ -127,6 +145,7 @@ const Post = ({
       {open && (
         <div className='write_new_comment'>
           <InputBase
+            onKeyUp={handleKeypress}
             multiline={true}
             onChange={(e) => handleInputComment(e)}
             placeholder='Insert your comment'

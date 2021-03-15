@@ -1,18 +1,46 @@
-$dark-primary-color: black;
+//light
 $light-color: white;
+$text-color: black;
 $secondary-color: #1da1f2;
+$secondary-color-dark: #1da1f2;
 $links-color: #1b95e0;
-$border-color: rgb(236, 236, 236);
+$links-color-dark: #1b95e0;
+$border-color: rgb(235, 238, 240);
 $small-text-color: #5b7083;
+$icon-button-color-light: rgb(110, 118, 125);
+$hover-post-light: rgba(255, 255, 255, 0.03);
+$searchbar-focused-color: white;
+$searchbar-normal-color: #ebeef0;
+$right-side-container-color: rgb(247, 249, 250);
+
+//dark
+$dark-color: black;
+$text-color-dark: white;
+$dark-border-color: rgb(47, 51, 54);
+$small-text-color-dark: #6e767d;
+$icon-button-color-dark: rgb(110, 118, 125);
+$hover-post-dark: rgba(255, 255, 255, 0.03);
+$separation-background-color-dark: #15181c;
+$searchbar-normal-color-dark: rgb(32, 35, 39);
+$right-side-container-color-dark: rgb(21, 24, 28);
 
 a {
   text-decoration: none;
   color: black;
 }
 
+@function set-text-color($color) {
+  @if (lightness($color) > 70) {
+    @return black;
+  } @else {
+    @return white;
+  }
+}
+
+// Set background & text color
 @mixin set-background($color) {
   background-color: $color;
-  color: white;
+  color: set-text-color($color);
 }
 
 .btn-main {

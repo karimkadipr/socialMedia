@@ -2,14 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAnyPost, deleteCommentFromPost } from '../post/postActions'
-import {
-  getAllProfiles,
-  getMyProfile,
-  getProfileById,
-} from '../profile/profileActions'
+import { getAllProfiles, getMyProfile } from '../profile/profileActions'
 import { IconButton } from '@material-ui/core'
-import { OutlinedInput, Button, InputBase } from '@material-ui/core'
-import MoreIcon from '@material-ui/icons/More'
+import { Button, InputBase } from '@material-ui/core'
+
 import {
   deletePostById,
   likePostById,
@@ -25,19 +21,29 @@ import ChatBubbleIcon from '@material-ui/icons/ChatBubble'
 import ShareIcon from '@material-ui/icons/Share'
 import DeleteIcon from '@material-ui/icons/Delete'
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace'
+import './styles/layout.scss'
 import './styles/postDetails.scss'
-import TwitterIcon from '@material-ui/icons/Twitter'
 import Comment from '../components/Comment'
 import dateFormat from 'dateformat'
-import { ReactComponent as ProfileSvg } from './images/man.svg'
-import { ReactComponent as HomeSvg } from './images/house.svg'
-import { ReactComponent as TelescopeSvg } from './images/telescope.svg'
 import RightSide from '../components/RightSide'
 import LeftSide from '../components/LeftSide'
+import classNames from 'classnames'
 
 const PostDetails = ({ history, match }) => {
   const pseudo = match.params.pseudo
   const postId = match.params.postId
+
+  const darkModeValue = useSelector((state) => state.darkMode)
+  const { darkMode } = darkModeValue
+
+  const containerStyle = classNames(
+    'content_container_post',
+    'content_container_post_color_light'
+  )
+  const containerStyleDark = classNames(
+    'content_container_post',
+    'content_container_post_color_dark'
+  )
 
   const dispatch = useDispatch()
   const [comment, setComment] = useState('')
@@ -51,9 +57,6 @@ const PostDetails = ({ history, match }) => {
 
   const getAnyPostValue = useSelector((state) => state.getAnyPost)
   const { post } = getAnyPostValue
-
-  /*   const getProfileByIdValue = useSelector(state => state.getProfileById)
-  const {profileInfo : profileInfoById} = getProfileByIdValue */
 
   const likePost = useSelector((state) => state.likePost)
   const { success: successLike } = likePost
@@ -88,9 +91,7 @@ const PostDetails = ({ history, match }) => {
       dispatch(getAnyPost(pseudo, postId))
       dispatch(getCommentsPost(postId))
     }
-    /*   if(!profileInfoById && post) {
-      dispatch(getProfileById(post.user))
-    } */
+
     if (addCommentSuccess || successDeleteComment) {
       dispatch(getAnyPost(pseudo, postId))
       dispatch(getCommentsPost(postId))
@@ -148,8 +149,14 @@ const PostDetails = ({ history, match }) => {
     dispatch(deleteCommentFromPost(id1, id2))
   }
 
+  const handleKeypress = (e, comment, id) => {
+    if (e.keyCode === 13) {
+      handleSubmitComment(comment, id)
+    }
+  }
+
   return (
-    <div className='content_container_post'>
+    <div className={darkMode ? containerStyleDark : containerStyle}>
       <div className='left_container_post'>
         <div className='list_container_post'>
           <LeftSide post />
@@ -231,6 +238,7 @@ const PostDetails = ({ history, match }) => {
                       avatar={profileInfo.avatar}>
                       <div className='write_new_comment_post_screen'>
                         <InputBase
+                          onKeyUp={(e) => handleKeypress(e, comment, postId)}
                           multiline={true}
                           onChange={(e) => setComment(e.target.value)}
                           placeholder='Insert your comment'

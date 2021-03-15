@@ -139,7 +139,10 @@ const updateProfile = asyncHandler(async (req, res) => {
 
 const getProfileById = asyncHandler(async (req, res) => {
   const profileId = req.params.id
-  const profile = await Profile.findById(profileId).populate('user', 'id name')
+  const profile = await Profile.findById(profileId).populate(
+    'user',
+    'id name pseudo'
+  )
   if (profile) {
     res.status(200).json(profile)
   } else {

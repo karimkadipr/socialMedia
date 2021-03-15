@@ -1,6 +1,35 @@
 @import './config';
 @import './button';
 
+.hole_screen_light {
+  background: $light-color;
+  color: $text-color;
+  .Submit_button_redirect_login {
+    background: $light-color;
+    &:hover {
+      background: $light-color;
+    }
+  }
+}
+.hole_screen_dark {
+  background: $dark-color;
+  color: $text-color-dark;
+  .MuiInputBase-root {
+    color: $text-color-dark;
+    border: 1px solid $secondary-color;
+    border-radius: 5px;
+  }
+  .Mui-focused {
+    border: none;
+  }
+  .Submit_button_redirect_login {
+    background: $dark-color;
+    &:hover {
+      background: $dark-color;
+    }
+  }
+}
+
 .hole_screen {
   height: 969px;
   display: flex;
@@ -53,7 +82,6 @@
     }
   }
   .Submit_button_redirect_login {
-    background: white;
     color: $secondary-color;
     font-weight: 700;
     border: 1px solid $secondary-color;
@@ -61,7 +89,6 @@
     border-radius: 25px;
     min-height: 55px;
     &:hover {
-      background: white;
     }
   }
 }

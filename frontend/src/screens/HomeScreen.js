@@ -22,6 +22,7 @@ import {
 } from '../post/postConstants'
 import RightSide from '../components/RightSide'
 import LeftSide from '../components/LeftSide'
+import classNames from 'classnames'
 
 const HomeScreen = ({ history }) => {
   const dispatch = useDispatch()
@@ -56,6 +57,18 @@ const HomeScreen = ({ history }) => {
 
   const addPostValues = useSelector((state) => state.addPost)
   const { success: addPostSuccess } = addPostValues
+
+  const darkModeValue = useSelector((state) => state.darkMode)
+  const { darkMode } = darkModeValue
+
+  const containerStyle = classNames(
+    'content_container',
+    'content_container_color_light'
+  )
+  const containerStyleDark = classNames(
+    'content_container',
+    'content_container_color_dark'
+  )
 
   useEffect(() => {
     if (!profileInfo) {
@@ -143,7 +156,7 @@ const HomeScreen = ({ history }) => {
   }
 
   return (
-    <div className='content_container'>
+    <div className={darkMode ? containerStyleDark : containerStyle}>
       <div className='left_container'>
         <div className='list_container'>
           <LeftSide logout handleLogout={handleLogout} />
@@ -160,7 +173,7 @@ const HomeScreen = ({ history }) => {
               <div className='profile_pic_post_container_home'>
                 <div className='profile_pic_post_home'>
                   {profileInfo && profileInfo.avatar ? (
-                    <img src={profileInfo.avatar} alt='No profil pic' />
+                    <img src={profileInfo.avatar} alt='No profile pic' />
                   ) : (
                     <img
                       src='/images/empty_profile_pic.jpg'

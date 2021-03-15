@@ -1,7 +1,9 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { IconButton } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 import Linkify from 'react-linkify'
+import classNames from 'classnames'
 import './styles/comment.scss'
 
 const Comment = ({
@@ -14,8 +16,20 @@ const Comment = ({
   children,
   avatar,
 }) => {
+  const darkModeValue = useSelector((state) => state.darkMode)
+  const { darkMode } = darkModeValue
+
+  const commentStyle = classNames(
+    'comment_container',
+    'comment_container_light'
+  )
+  const commentStyleDark = classNames(
+    'comment_container',
+    'comment_container_dark'
+  )
+
   return (
-    <div className='comment_container'>
+    <div className={darkMode ? commentStyleDark : commentStyle}>
       <div className='comment_pic_post_container'>
         <div className='comment_pic_post'>
           {avatar ? (

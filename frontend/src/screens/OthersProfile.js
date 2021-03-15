@@ -35,6 +35,7 @@ import dateFormat from 'dateformat'
 import { ReactComponent as NoPostSvg } from './images/undraw_Posts_re_ormv.svg'
 import RightSide from '../components/RightSide'
 import LeftSide from '../components/LeftSide'
+import classNames from 'classnames'
 
 const Profile = ({ history, match }) => {
   const profileId = match.params.id
@@ -69,6 +70,19 @@ const Profile = ({ history, match }) => {
 
   const getAllProfilesValue = useSelector((state) => state.getAllProfiles)
   const { profiles } = getAllProfilesValue
+
+  const darkModeValue = useSelector((state) => state.darkMode)
+  const { darkMode } = darkModeValue
+
+  const containerStyle = classNames(
+    'content_container',
+    'content_container_color_light'
+  )
+
+  const containerStyleDark = classNames(
+    'content_container',
+    'content_container_color_dark'
+  )
 
   useEffect(() => {
     if (!userInfo) {
@@ -173,9 +187,18 @@ const Profile = ({ history, match }) => {
       type: GET_POSTS_BY_PROFILE_RESET,
     })
   }
+  const handleGoBack = () => {
+    dispatch({
+      type: GET_PROFILE_BY_ID_RESET,
+    })
+    dispatch({
+      type: GET_POSTS_BY_PROFILE_RESET,
+    })
+    history.goBack()
+  }
 
   return (
-    <div className='content_container'>
+    <div className={darkMode ? containerStyleDark : containerStyle}>
       <div className='left_container'>
         <div className='list_container'>
           <LeftSide post />
@@ -185,7 +208,7 @@ const Profile = ({ history, match }) => {
         <div className='main_content'>
           <div className='main_content_left'>
             <div className='Home_Title'>
-              <Link onClick={() => history.goBack()}>
+              <Link onClick={handleGoBack}>
                 <IconButton>
                   <KeyboardBackspaceIcon />
                 </IconButton>
@@ -219,7 +242,10 @@ const Profile = ({ history, match }) => {
                 <>
                   <div className='name_button'>
                     {profileInfo && profileInfo.user && (
-                      <p>{profileInfo.user.name}</p>
+                      <div className='name_pseudo_container'>
+                        <p>{profileInfo.user.name}</p>
+                        <p>@{profileInfo.user.pseudo}</p>
+                      </div>
                     )}
 
                     {MyProfileInfo && MyProfileInfo._id !== profileInfo._id && (
@@ -298,13 +324,13 @@ const Profile = ({ history, match }) => {
                         style={{ paddingTop: 8 }}
                         className='info_container_one'>
                         <span style={{ paddingRight: '1rem' }}>
-                          <span style={{ fontWeight: '700' }}>
+                          <span style={{ fontWeight: '700', color: 'white' }}>
                             {profileInfo.subscriptions.length}
                           </span>
                           Following
                         </span>
                         <span>
-                          <span style={{ fontWeight: '700' }}>
+                          <span style={{ fontWeight: '700', color: 'white' }}>
                             {profileInfo.subscribers.length}
                           </span>
                           Followers

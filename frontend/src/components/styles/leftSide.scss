@@ -4,7 +4,6 @@
   position: fixed;
   top: 0;
   width: 246px;
-  height: 1000px;
   padding: 0 1rem 0 0;
   display: flex;
   flex-direction: column;
@@ -15,10 +14,6 @@
     align-items: center;
     font-size: 22px;
     padding: 0 1.25rem;
-    color: black;
-    &:hover {
-      color: black;
-    }
     svg {
       padding: 0 1.5rem 0 0;
       height: 30px;
@@ -31,7 +26,6 @@
     svg {
       height: 35px;
       width: 35px;
-      color: $secondary-color;
     }
   }
   button {
@@ -39,5 +33,35 @@
   }
   .btn-main {
     margin-top: 1rem;
+  }
+}
+
+//colors
+
+.fixed_sidebar_profile_light {
+  a:not(:first-child) {
+    color: black;
+    &:hover {
+      color: black;
+    }
+  }
+  a:first-child {
+    svg {
+      color: $secondary-color;
+    }
+  }
+}
+
+.fixed_sidebar_profile_dark {
+  a:not(:first-child) {
+    color: white;
+    &:hover {
+      color: white;
+    }
+  }
+  a:first-child {
+    svg {
+      color: white;
+    }
   }
 }

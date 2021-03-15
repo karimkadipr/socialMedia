@@ -1,9 +1,32 @@
 @import './config';
 
+.the_hole_create_profile_page_light {
+  background: $light-color;
+  color: $text-color;
+  .MuiInputBase-input {
+    color: $text-color;
+    border: 1px solid $secondary-color;
+    border-radius: 5px;
+  }
+}
+
+.the_hole_create_profile_page_dark {
+  background: $dark-color;
+  color: $text-color-dark;
+  .MuiOutlinedInput-root {
+    color: $text-color-dark;
+    border: 1px solid $secondary-color;
+    border-radius: 5px;
+  }
+  .Mui-focused {
+    border: none;
+  }
+}
+
 .the_hole_create_profile_page {
   background-size: 200%;
   animation: bg-animation 5s infinite alternate;
-  height: 894px;
+  height: 919px;
   padding-top: 50px;
 }
 

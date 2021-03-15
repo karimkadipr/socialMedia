@@ -7,12 +7,24 @@ import RightSide from '../components/RightSide'
 import './styles/discoverProfiles.scss'
 import './styles/layout.scss'
 import LeftSide from '../components/LeftSide'
+import classNames from 'classnames'
 
 const DiscoverProfiles = ({ match }) => {
   const keyword = match.params.keyword
 
   const dispatch = useDispatch()
 
+  const darkModeValue = useSelector((state) => state.darkMode)
+  const { darkMode } = darkModeValue
+
+  const containerStyle = classNames(
+    'content_container',
+    'content_container_color_light'
+  )
+  const containerStyleDark = classNames(
+    'content_container',
+    'content_container_color_dark'
+  )
   const getAllProfilesValues = useSelector((state) => state.getAllProfiles)
   const { profiles } = getAllProfilesValues
 
@@ -21,7 +33,7 @@ const DiscoverProfiles = ({ match }) => {
   }, [dispatch, keyword])
 
   return (
-    <div className='content_container'>
+    <div className={darkMode ? containerStyleDark : containerStyle}>
       <div className='left_container'>
         <div className='list_container'>
           <LeftSide post />
