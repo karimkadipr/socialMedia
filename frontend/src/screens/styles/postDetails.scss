@@ -36,6 +36,11 @@
       border-bottom: 1px solid $border-color;
     }
   }
+  .post_actions_post {
+    svg {
+      color: $icon-button-color-light;
+    }
+  }
 }
 
 .content_container_post_color_dark {
@@ -71,6 +76,11 @@
     }
     .likes_comments_number_post {
       border-bottom: 1px solid $dark-border-color;
+    }
+  }
+  .post_actions_post {
+    svg {
+      color: $icon-button-color-dark;
     }
   }
 }
