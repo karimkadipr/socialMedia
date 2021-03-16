@@ -25,6 +25,22 @@ import LeftSide from '../components/LeftSide'
 import classNames from 'classnames'
 
 const HomeScreen = ({ history }) => {
+  const [dimensions, setDimensions] = useState({
+    height: window.innerHeight,
+    width: window.innerWidth,
+  })
+  useEffect(() => {
+    function handleResize() {
+      setDimensions({
+        height: window.innerHeight,
+        width: window.innerWidth,
+      })
+    }
+    window.addEventListener('resize', handleResize)
+    return (_) => {
+      window.removeEventListener('resize', handleResize)
+    }
+  })
   const dispatch = useDispatch()
   const [comment, setComment] = useState('')
   const [text, setText] = useState('')
@@ -158,9 +174,11 @@ const HomeScreen = ({ history }) => {
   return (
     <div className={darkMode ? containerStyleDark : containerStyle}>
       <div className='left_container'>
-        <div className='list_container'>
-          <LeftSide logout handleLogout={handleLogout} />
-        </div>
+        {dimensions.width > 700 && (
+          <div className='list_container'>
+            <LeftSide logout handleLogout={handleLogout} />
+          </div>
+        )}
       </div>
       <div className='right_container'>
         <div className='main_content'>
@@ -230,6 +248,7 @@ const HomeScreen = ({ history }) => {
               )}
             </div>
           </div>
+
           <RightSide profiles={profiles} showMore />
         </div>
       </div>

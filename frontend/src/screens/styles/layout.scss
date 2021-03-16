@@ -5,6 +5,7 @@
   background: $light-color;
   color: $text-color;
   .main_content_left {
+    background: $light-color;
     border: 1px solid $border-color;
   }
   .Home_Title {
@@ -29,7 +30,12 @@
   background: $dark-color;
   color: $text-color-dark;
   .main_content_left {
-    border: 1px solid $dark-border-color;
+    background: $dark-color;
+  }
+  @media (min-width: 700px) {
+    .main_content_left {
+      border: 1px solid $dark-border-color;
+    }
   }
   .Home_Title {
     background: $dark-color;
@@ -59,9 +65,29 @@
     justify-content: flex-end;
     flex-grow: 1;
 
-    .list_container {
-      width: 270px;
-      position: relative;
+    @media (min-width: 1285px) {
+      .list_container {
+        width: 270px;
+        position: relative;
+      }
+    }
+    @media (max-width: 1285px) and (min-width: 715px) {
+      .list_container {
+        position: relative;
+        width: 100%;
+        min-width: 64px;
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+    @media (max-width: 715px) {
+      .list_container {
+        position: relative;
+        width: 100%;
+        min-width: 64px;
+        display: flex;
+        justify-content: center;
+      }
     }
   }
   // Right
@@ -70,16 +96,52 @@
     justify-content: flex-start;
     flex-grow: 1;
 
+    @media (max-width: 1050px) and (min-width: 700px) {
+      .main_content {
+        width: 600px;
+      }
+    }
+    @media (min-width: 1050px) {
+      .main_content {
+        width: 990px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .main_content_left {
+        width: 100vw;
+        min-height: 863px;
+      }
+      .Home_Title {
+        width: 100vw;
+        padding: 0 1rem;
+      }
+      .main_content {
+        width: 100vw;
+      }
+    }
+
+    @media (min-width: 700px) {
+      .main_content_left {
+        width: 600px;
+        min-height: 863px;
+      }
+      .Home_Title {
+        width: 568px;
+        padding: 0 1rem;
+      }
+      .main_content {
+      }
+    }
+
     .main_content {
       display: flex;
       justify-content: space-between;
-      width: 990px;
       position: relative;
 
       .main_content_left {
         position: relative;
-        min-height: 920px;
-        width: 600px;
+
         border-top: 0;
         padding-top: 53px;
         padding-bottom: 53px;
@@ -88,8 +150,7 @@
           position: fixed;
           display: flex;
           align-items: center;
-          width: 568px;
-          padding: 0 1rem;
+
           z-index: 999;
           border-top: 0;
           height: 53px;

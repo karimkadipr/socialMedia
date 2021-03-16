@@ -96,9 +96,20 @@
     justify-content: flex-end;
     flex-grow: 1;
 
-    .list_container_post {
-      width: 270px;
-      position: relative;
+    @media (min-width: 1285px) {
+      .list_container_post {
+        width: 270px;
+        position: relative;
+      }
+    }
+    @media (max-width: 1285px) {
+      .list_container_post {
+        position: relative;
+        width: 100%;
+        min-width: 64px;
+        display: flex;
+        justify-content: flex-end;
+      }
     }
   }
   // Right

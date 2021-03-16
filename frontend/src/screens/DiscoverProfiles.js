@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { getAllProfiles } from '../profile/profileActions'
@@ -10,6 +10,22 @@ import LeftSide from '../components/LeftSide'
 import classNames from 'classnames'
 
 const DiscoverProfiles = ({ match }) => {
+  const [dimensions, setDimensions] = useState({
+    height: window.innerHeight,
+    width: window.innerWidth,
+  })
+  useEffect(() => {
+    function handleResize() {
+      setDimensions({
+        height: window.innerHeight,
+        width: window.innerWidth,
+      })
+    }
+    window.addEventListener('resize', handleResize)
+    return (_) => {
+      window.removeEventListener('resize', handleResize)
+    }
+  })
   const keyword = match.params.keyword
 
   const dispatch = useDispatch()
@@ -35,9 +51,11 @@ const DiscoverProfiles = ({ match }) => {
   return (
     <div className={darkMode ? containerStyleDark : containerStyle}>
       <div className='left_container'>
-        <div className='list_container'>
-          <LeftSide post />
-        </div>
+        {dimensions.width > 700 && (
+          <div className='list_container'>
+            <LeftSide post />
+          </div>
+        )}
       </div>
       <div className='right_container'>
         <div className='main_content'>
