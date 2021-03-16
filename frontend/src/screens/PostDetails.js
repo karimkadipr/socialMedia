@@ -30,6 +30,23 @@ import LeftSide from '../components/LeftSide'
 import classNames from 'classnames'
 
 const PostDetails = ({ history, match }) => {
+  const [dimensions, setDimensions] = useState({
+    height: window.innerHeight,
+    width: window.innerWidth,
+  })
+  useEffect(() => {
+    function handleResize() {
+      setDimensions({
+        height: window.innerHeight,
+        width: window.innerWidth,
+      })
+    }
+    window.addEventListener('resize', handleResize)
+    return (_) => {
+      window.removeEventListener('resize', handleResize)
+    }
+  })
+
   const pseudo = match.params.pseudo
   const postId = match.params.postId
 
@@ -158,9 +175,11 @@ const PostDetails = ({ history, match }) => {
   return (
     <div className={darkMode ? containerStyleDark : containerStyle}>
       <div className='left_container_post'>
-        <div className='list_container_post'>
-          <LeftSide post />
-        </div>
+        {dimensions.width > 700 && (
+          <div className='list_container_post'>
+            <LeftSide post />
+          </div>
+        )}
       </div>
       <div className='right_container_post'>
         <div className='main_content_post'>

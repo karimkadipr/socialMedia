@@ -4,8 +4,10 @@
 .content_container_post_color_light {
   background: $light-color;
   color: $text-color;
-  .main_content_left_post {
-    border: 1px solid $border-color;
+  @media (min-width: 700px) {
+    .main_content_left_post {
+      border: 1px solid $border-color;
+    }
   }
   .Home_Title_post {
     background: $light-color;
@@ -46,8 +48,10 @@
 .content_container_post_color_dark {
   background: $dark-color;
   color: $text-color-dark;
-  .main_content_left_post {
-    border: 1px solid $dark-border-color;
+  @media (min-width: 700px) {
+    .main_content_left_post {
+      border: 1px solid $dark-border-color;
+    }
   }
   .Home_Title_post {
     background: $dark-color;
@@ -101,6 +105,30 @@
         width: 270px;
         position: relative;
       }
+      @media (min-width: 1285px) {
+        .list_container_post {
+          width: 270px;
+          position: relative;
+        }
+      }
+      @media (max-width: 1285px) and (min-width: 715px) {
+        .list_container_post {
+          position: relative;
+          width: 100%;
+          min-width: 64px;
+          display: flex;
+          justify-content: flex-end;
+        }
+      }
+      @media (max-width: 715px) {
+        .list_container_post {
+          position: relative;
+          width: 100%;
+          min-width: 64px;
+          display: flex;
+          justify-content: center;
+        }
+      }
     }
     @media (max-width: 1285px) {
       .list_container_post {
@@ -121,13 +149,11 @@
     .main_content_post {
       display: flex;
       justify-content: space-between;
-      width: 990px;
+
       position: relative;
 
       .main_content_left_post {
-        width: 600px;
         border-top: 0;
-        min-height: 920px;
         position: relative;
         padding-top: 53px;
 
@@ -160,7 +186,6 @@
           top: 0;
           z-index: 999;
           border-top: 0;
-          width: 567px;
           height: 53px;
           padding: 0 1rem;
 
@@ -267,5 +292,44 @@
       }
       text-transform: none;
     }
+  }
+}
+@media (min-width: 1050px) {
+  .main_content_post {
+    width: 990px;
+  }
+}
+@media (max-width: 1050px) and (min-width: 700px) {
+  .main_content_post {
+    width: 600px;
+  }
+}
+
+@media (max-width: 700px) {
+  .main_content_post {
+  }
+  .main_content_left_post {
+    width: 100vw;
+    min-height: 916px;
+  }
+  .Home_Title_post {
+    width: 100vw;
+    padding: 0 1rem;
+  }
+  .main_content_post {
+    width: 100vw;
+  }
+  .post_container_posts {
+  }
+}
+
+@media (min-width: 700px) {
+  .main_content_left_post {
+    width: 600px;
+    min-height: 863px;
+  }
+  .Home_Title_post {
+    width: 566px;
+    padding: 0 1rem;
   }
 }

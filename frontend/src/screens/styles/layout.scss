@@ -6,7 +6,11 @@
   color: $text-color;
   .main_content_left {
     background: $light-color;
-    border: 1px solid $border-color;
+  }
+  @media (min-width: 700px) {
+    .main_content_left {
+      border: 1px solid $border-color;
+    }
   }
   .Home_Title {
     background: $light-color;
@@ -127,7 +131,7 @@
         min-height: 863px;
       }
       .Home_Title {
-        width: 568px;
+        width: 566px;
         padding: 0 1rem;
       }
       .main_content {

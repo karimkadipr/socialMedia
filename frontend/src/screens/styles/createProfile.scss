@@ -8,6 +8,9 @@
     border: 1px solid $secondary-color;
     border-radius: 5px;
   }
+  .MuiFormLabel-root {
+    color: $small-text-color;
+  }
 }
 
 .the_hole_create_profile_page_dark {
@@ -20,6 +23,9 @@
   }
   .Mui-focused {
     border: none;
+  }
+  .MuiFormLabel-root {
+    color: $small-text-color-dark;
   }
 }
 
@@ -42,6 +48,9 @@
 .create_profile_container {
   width: 50%;
   margin: auto;
+  h1 {
+    margin-bottom: 2rem;
+  }
 
   .create_profile_input_container {
     display: flex;
