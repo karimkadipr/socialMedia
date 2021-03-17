@@ -64,11 +64,13 @@
     }
   }
 }
+
 .drop_menu_icon {
   padding-right: 1rem;
   height: 2rem;
   width: 2rem;
   color: $secondary-color;
+  cursor: pointer;
 }
 
 .side-menu-item {
@@ -88,14 +90,28 @@
 }
 
 .close_menu_button {
+  position: absolute;
   background: $secondary-color;
-  float: right;
   border: 0;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 5px 5px 0 0;
+
+  cursor: pointer;
+}
+
+@media (min-width: 500px) {
+  .close_menu_button {
+    left: 90%;
+    margin-top: 0.5rem;
+  }
+}
+@media (max-width: 500px) {
+  .close_menu_button {
+    left: 85%;
+    margin-top: 0.5rem;
+  }
 }
 .close_menu_button:focus .close_menu_button:active {
   border: 0;

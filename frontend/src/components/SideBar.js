@@ -69,6 +69,7 @@ function SideBar({ history, post, logout, handleLogout }) {
           <button onClick={() => setOpen(false)} className='close_menu_button'>
             <CloseIcon />
           </button>
+
           <DropItem>
             <Link to='/'>
               <IconButton>
