@@ -23,6 +23,7 @@ import {
 import RightSide from '../components/RightSide'
 import LeftSide from '../components/LeftSide'
 import classNames from 'classnames'
+import SideBar from '../components/SideBar'
 
 const HomeScreen = ({ history }) => {
   const [dimensions, setDimensions] = useState({
@@ -184,6 +185,9 @@ const HomeScreen = ({ history }) => {
         <div className='main_content'>
           <div className='main_content_left'>
             <div className='Home_Title'>
+              {dimensions.width < 700 && (
+                <SideBar logout handleLogout={handleLogout} />
+              )}
               <h3>Home</h3>
             </div>
 

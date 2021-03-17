@@ -24,6 +24,7 @@ import { ReactComponent as NoPostSvg } from './images/undraw_Posts_re_ormv.svg'
 import RightSide from '../components/RightSide'
 import LeftSide from '../components/LeftSide'
 import classNames from 'classnames'
+import SideBar from '../components/SideBar'
 
 const Profile = ({ history }) => {
   const [dimensions, setDimensions] = useState({
@@ -148,11 +149,16 @@ const Profile = ({ history }) => {
         <div className='main_content'>
           <div className='main_content_left'>
             <div className='Home_Title'>
-              <Link onClick={() => history.goBack()}>
-                <IconButton>
-                  <KeyboardBackspaceIcon />
-                </IconButton>
-              </Link>
+              {dimensions.width < 700 ? (
+                <SideBar post />
+              ) : (
+                <Link onClick={() => history.goBack()}>
+                  <IconButton>
+                    <KeyboardBackspaceIcon />
+                  </IconButton>
+                </Link>
+              )}
+
               <div>
                 {profileInfo ? <h3>{profileInfo.user.name}</h3> : <h3></h3>}
                 {posts ? (

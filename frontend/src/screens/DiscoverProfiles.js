@@ -8,6 +8,7 @@ import './styles/discoverProfiles.scss'
 import './styles/layout.scss'
 import LeftSide from '../components/LeftSide'
 import classNames from 'classnames'
+import SideBar from '../components/SideBar'
 
 const DiscoverProfiles = ({ match }) => {
   const [dimensions, setDimensions] = useState({
@@ -61,6 +62,7 @@ const DiscoverProfiles = ({ match }) => {
         <div className='main_content'>
           <div className='main_content_left'>
             <div className='Home_Title'>
+              {dimensions.width < 700 && <SideBar post />}
               <h3>Connect</h3>
             </div>
             <div className='suggestion_all_users'>

@@ -28,6 +28,7 @@ import dateFormat from 'dateformat'
 import RightSide from '../components/RightSide'
 import LeftSide from '../components/LeftSide'
 import classNames from 'classnames'
+import SideBar from '../components/SideBar'
 
 const PostDetails = ({ history, match }) => {
   const [dimensions, setDimensions] = useState({
@@ -185,11 +186,15 @@ const PostDetails = ({ history, match }) => {
         <div className='main_content_post'>
           <div className='main_content_left_post'>
             <div className='Home_Title_post'>
-              <Link to='#' onClick={() => history.goBack()}>
-                <IconButton>
-                  <KeyboardBackspaceIcon />
-                </IconButton>
-              </Link>
+              {dimensions.width < 700 ? (
+                <SideBar post />
+              ) : (
+                <Link onClick={() => history.goBack()}>
+                  <IconButton>
+                    <KeyboardBackspaceIcon />
+                  </IconButton>
+                </Link>
+              )}
               <h3>Post</h3>
             </div>
             {post && profileInfo ? (

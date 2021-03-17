@@ -118,3 +118,18 @@
     padding: 0 1rem;
   }
 }
+
+@media screen and (min-width: 700px) {
+  .username_pseudo {
+    p:nth-child(3) {
+      max-width: 350px;
+    }
+  }
+}
+@media screen and (max-width: 700px) {
+  .username_pseudo {
+    width: 30%;
+    p:nth-child(3) {
+    }
+  }
+}
