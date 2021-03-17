@@ -271,9 +271,22 @@
   }
 
   .write_new_comment_post_screen {
+    @media (min-width: 700px) {
+      .MuiInputBase-input {
+        width: 350px;
+        margin: 0 1rem 0 0;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .MuiInputBase-input {
+        width: 35vw;
+        margin: 0 1rem 0 0;
+        font-size: 12px;
+      }
+    }
+
     .MuiInputBase-input {
-      width: 350px;
-      margin: 0 1rem 0 0;
       padding: 1rem 0 1rem 1rem;
       border: 1px solid $secondary-color;
       border-radius: 15px;
