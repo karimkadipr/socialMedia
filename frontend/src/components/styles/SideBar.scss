@@ -6,6 +6,7 @@
   background-color: $light-color;
   border: 1px solid $border-color;
   border-left: 0;
+  border-top: 0;
   .side-menu-item {
     color: $text-color;
   }
@@ -15,11 +16,17 @@
   .side-menu-item:hover {
     background-color: $hover-post-light;
   }
+  .close_menu_button {
+    svg {
+      color: $light-color;
+    }
+  }
 }
 .SideMenu_dark {
   background-color: $dark-color;
   border: 1px solid $dark-border-color;
   border-left: 0;
+  border-top: 0;
   .side-menu-item {
     color: $text-color-dark;
   }
@@ -28,6 +35,11 @@
   }
   .side-menu-item:hover {
     background-color: $hover-post-dark;
+  }
+  .close_menu_button {
+    svg {
+      color: $dark-color;
+    }
   }
 }
 
@@ -73,6 +85,20 @@
   height: 20px;
   padding: 0.5rem;
   padding-right: 1rem;
+}
+
+.close_menu_button {
+  background: $secondary-color;
+  float: right;
+  border: 0;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px 5px 0 0;
+}
+.close_menu_button:focus .close_menu_button:active {
+  border: 0;
 }
 
 .side-bar-enter {

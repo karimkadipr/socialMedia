@@ -11,6 +11,7 @@ import { IconButton } from '@material-ui/core'
 import TwitterIcon from '@material-ui/icons/Twitter'
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleDarkMode } from '../darkmode/darkmodeActions'
+import CloseIcon from '@material-ui/icons/Close'
 import classNames from 'classnames'
 
 function SideBar({ history, post, logout, handleLogout }) {
@@ -65,6 +66,9 @@ function SideBar({ history, post, logout, handleLogout }) {
         classNames='side-bar'
         unmountOnExit>
         <div className={darkMode ? sideBarStyleDark : sideBarStyle}>
+          <button onClick={() => setOpen(false)} className='close_menu_button'>
+            <CloseIcon />
+          </button>
           <DropItem>
             <Link to='/'>
               <IconButton>
