@@ -54,6 +54,10 @@ const postSchema = mongoose.Schema(
         avatar: {
           type: String,
         },
+        isVerified: {
+          type: Boolean,
+          default: false,
+        },
         createdAt: {
           type: Date,
           default: Date.now,
@@ -80,12 +84,20 @@ const postSchema = mongoose.Schema(
         avatar: {
           type: String,
         },
+        isVerified: {
+          type: Boolean,
+          default: false,
+        },
         date: {
           type: Date,
           default: Date.now,
         },
       },
     ],
+    isVerified: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,
