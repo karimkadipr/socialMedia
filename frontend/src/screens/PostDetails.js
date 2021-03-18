@@ -198,11 +198,11 @@ const PostDetails = ({ history, match }) => {
               )}
               <h3>Post</h3>
             </div>
-            {post && profileInfo ? (
+            {post && profileInfo && post.profile ? (
               <>
                 <div className='post_container_posts'>
                   <Link
-                    to={`/profile/${post.profile}`}
+                    to={`/profile/${post.profile._id}`}
                     className='profile_pic_and_name'>
                     {post.avatar ? (
                       <img src={post.avatar} alt='No profile pic' />
@@ -215,7 +215,7 @@ const PostDetails = ({ history, match }) => {
                     <div>
                       <p className='twitter_badge_with_name'>
                         {post.name}
-                        {profileInfo.isVerified && (
+                        {post.profile.isVerified && (
                           <TwitterBadgeSvg className='twitter_verified_badge' />
                         )}
                       </p>
