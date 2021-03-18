@@ -9,6 +9,7 @@ import {
   unFollowAProfile,
   getAllProfiles,
   checkFollow,
+  setProfileVerified,
 } from './profileController.js'
 import { protect } from '../middleware/authMiddleware.js'
 
@@ -21,6 +22,7 @@ router
   .put(protect, updateProfile)
   .delete(protect, deleteProfile)
 router.route('/all').get(protect, getAllProfiles)
+router.route('/setverified/:id').post(protect, setProfileVerified)
 router.route('/follow/:id').post(protect, followAProfile)
 router.route('/unfollow/:id').post(protect, unFollowAProfile)
 router.route('/isfollowed/:id').get(protect, checkFollow)

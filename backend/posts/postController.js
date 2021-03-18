@@ -27,7 +27,8 @@ const addNewPost = asyncHandler(async (req, res) => {
 const getMyPosts = asyncHandler(async (req, res) => {
   const userId = req.user
   const posts = await Post.find({ user: userId })
-    .populate('User', 'id name')
+    .populate('user', 'id name')
+    .populate('profile', 'id user isVerified')
     .sort({ createdAt: -1 })
   if (posts) {
     posts.map((post) => {
@@ -129,6 +130,7 @@ const addAComment = asyncHandler(async (req, res) => {
       text,
       name: user.name,
       avatar: profile.avatar,
+      isVerified: profile.isVerified,
     })
     post.numberOfComments = post.comments.length
     const newPost = await post.save()
@@ -165,7 +167,10 @@ const getAnyPost = asyncHandler(async (req, res) => {
   const pseudo = req.params.pseudo
   const postId = req.params.postId
 
-  const post = await Post.findOne({ pseudo, _id: postId })
+  const post = await Post.findOne({ pseudo, _id: postId }).populate(
+    'profile',
+    'id user isVerified'
+  )
 
   if (post) {
     if (post.likes.find((like) => like.user.equals(userId))) {
@@ -197,7 +202,10 @@ const getPostsByProfile = asyncHandler(async (req, res) => {
   const profileId = req.params.id
   const userId = req.user
   const profile = await Profile.findById(profileId)
-  const posts = await Post.find({ user: profile.user })
+  const posts = await Post.find({ user: profile.user }).populate(
+    'profile',
+    'id user isVerified'
+  )
   if (posts) {
     posts.map((post) => {
       if (post.likes.find((like) => like.user.equals(userId))) {
@@ -229,7 +237,10 @@ const getSubsPosts = asyncHandler(async (req, res) => {
 
     const userProfileList = profiles.map((profile) => profile.user)
 
-    const posts = await Post.find({ user: { $in: userProfileList } })
+    const posts = await Post.find({ user: { $in: userProfileList } }).populate(
+      'profile',
+      'id user isVerified'
+    )
     posts.map((post) => {
       if (post.likes.find((like) => like.user.equals(userId))) {
         post.isLiked = true
@@ -237,7 +248,10 @@ const getSubsPosts = asyncHandler(async (req, res) => {
         post.isLiked = false
       }
     })
-    const myPosts = await Post.find({ user: userId })
+    const myPosts = await Post.find({ user: userId }).populate(
+      'profile',
+      'id user isVerified'
+    )
     myPosts.map((post) => {
       if (post.likes.find((like) => like.user.equals(userId))) {
         post.isLiked = true

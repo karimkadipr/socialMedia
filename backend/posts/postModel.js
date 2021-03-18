@@ -9,7 +9,6 @@ const postSchema = mongoose.Schema(
     },
     profile: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
       ref: 'Profile',
     },
     name: {
@@ -54,10 +53,6 @@ const postSchema = mongoose.Schema(
         avatar: {
           type: String,
         },
-        isVerified: {
-          type: Boolean,
-          default: false,
-        },
         createdAt: {
           type: Date,
           default: Date.now,
@@ -86,7 +81,6 @@ const postSchema = mongoose.Schema(
         },
         isVerified: {
           type: Boolean,
-          default: false,
         },
         date: {
           type: Date,
@@ -94,10 +88,6 @@ const postSchema = mongoose.Schema(
         },
       },
     ],
-    isVerified: {
-      type: Boolean,
-      default: false,
-    },
   },
   {
     timestamps: true,

@@ -7,6 +7,10 @@ const profileSchema = mongoose.Schema(
       unique: true,
       ref: 'User',
     },
+    isVerified: {
+      type: Boolean,
+      default: false,
+    },
     avatar: {
       type: String,
     },
@@ -96,10 +100,6 @@ const profileSchema = mongoose.Schema(
     },
     website: {
       type: String,
-    },
-    isVerified: {
-      type: Boolean,
-      default: false,
     },
   },
   {

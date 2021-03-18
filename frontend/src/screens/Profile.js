@@ -21,6 +21,7 @@ import CakeIcon from '@material-ui/icons/Cake'
 import Post from '../components/Post'
 import dateFormat from 'dateformat'
 import { ReactComponent as NoPostSvg } from './images/undraw_Posts_re_ormv.svg'
+import { ReactComponent as TwitterBadgeSvg } from './images/twitter-verified-badge.svg'
 import RightSide from '../components/RightSide'
 import LeftSide from '../components/LeftSide'
 import classNames from 'classnames'
@@ -192,7 +193,12 @@ const Profile = ({ history }) => {
                 <>
                   <div className='name_button'>
                     <div className='name_pseudo_container'>
-                      <p>{profileInfo.user.name}</p>
+                      <p className='twitter_badge_with_name'>
+                        {profileInfo.user.name}
+                        {profileInfo.isVerified && (
+                          <TwitterBadgeSvg className='twitter_verified_badge' />
+                        )}
+                      </p>
                       <p>@{profileInfo.user.pseudo}</p>
                     </div>
                     <Button
@@ -279,6 +285,7 @@ const Profile = ({ history }) => {
               {posts && posts.length !== 0 && profileInfo ? (
                 posts.map((post) => (
                   <Post
+                    isVerified={post.profile.isVerified}
                     createdAt={post.createdAt}
                     isLiked={post.isLiked}
                     myAvatar={profileInfo.avatar}

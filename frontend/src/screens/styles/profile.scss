@@ -135,6 +135,18 @@
   position: absolute;
 }
 
+.twitter_verified_badge {
+  height: 1.25rem;
+  width: 1.25rem;
+  padding-left: 0.5rem;
+  color: white;
+}
+.twitter_badge_with_name {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
 //colors
 
 .content_container_color_light {

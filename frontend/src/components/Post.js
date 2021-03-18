@@ -10,6 +10,7 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
 import DeleteIcon from '@material-ui/icons/Delete'
 import Linkify from 'react-linkify'
 import classNames from 'classnames'
+import { ReactComponent as TwitterBadgeSvg } from './images/twitter-verified-badge.svg'
 import './styles/post.scss'
 
 const Post = ({
@@ -29,6 +30,7 @@ const Post = ({
   handleInputComment,
   handleSubmitComment,
   createdAt,
+  isVerified,
 }) => {
   const [open, setOpen] = useState(false)
 
@@ -86,19 +88,28 @@ const Post = ({
           <div className='profile_pic_post_container'>
             <div className='profile_pic_post'>
               {myAvatar ? (
-                <img src={myAvatar} alt='No profil pic' />
+                <img src={myAvatar} alt='No profile pic' />
               ) : OthersAvatar ? (
-                <img src={OthersAvatar} alt='No profil pic' />
+                <img src={OthersAvatar} alt='No profile pic' />
               ) : (
-                <img src='/images/empty_profile_pic.jpg' alt='No profil pic' />
+                <img src='/images/empty_profile_pic.jpg' alt='No profile pic' />
               )}
             </div>
           </div>
           <div className='content_post'>
-            <p>
-              <span>{name} </span>
-              <span>@{pseudo}</span>
-              <span>{timeToDisplay}</span>
+            <p className='twitter_badge_with_name'>
+              <span>{name}</span>
+              {isVerified && (
+                <TwitterBadgeSvg
+                  className='twitter_verified_badge'
+                  style={{ paddingRight: ' 0.5rem' }}
+                />
+              )}
+
+              <span>
+                @{pseudo}
+                {timeToDisplay}
+              </span>
             </p>
             <Linkify>
               <object className='text_of_the_post' type='owo/uwu'>

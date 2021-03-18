@@ -4,6 +4,7 @@ import { withRouter } from 'react-router'
 import { Link } from 'react-router-dom'
 import { IconButton, OutlinedInput } from '@material-ui/core'
 import MoreIcon from '@material-ui/icons/More'
+import { ReactComponent as TwitterBadgeSvg } from './images/twitter-verified-badge.svg'
 import classNames from 'classnames'
 import './styles/rightSide.scss'
 
@@ -76,7 +77,13 @@ const RightSide = ({ profiles, showMore, history, handleChangeLink }) => {
                     />
                   )}
                   <div className='shortcut_user_container'>
-                    <p>{profile.user.name}</p>
+                    <p className='twitter_badge_with_name'>
+                      {profile.user.name}
+                      {profile.isVerified && (
+                        <TwitterBadgeSvg className='twitter_verified_badge' />
+                      )}
+                    </p>
+
                     <p>@{profile.user.pseudo}</p>
                   </div>
                   <IconButton>

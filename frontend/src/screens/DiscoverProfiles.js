@@ -9,6 +9,7 @@ import './styles/layout.scss'
 import LeftSide from '../components/LeftSide'
 import classNames from 'classnames'
 import SideBar from '../components/SideBar'
+import { ReactComponent as TwitterBadgeSvg } from './images/twitter-verified-badge.svg'
 
 const DiscoverProfiles = ({ match }) => {
   const [dimensions, setDimensions] = useState({
@@ -81,7 +82,12 @@ const DiscoverProfiles = ({ match }) => {
                       />
                     )}
                     <div className='username_pseudo'>
-                      <p>{profile.user.name}</p>
+                      <p className='twitter_badge_with_name'>
+                        {profile.user.name}
+                        {profile.isVerified && (
+                          <TwitterBadgeSvg className='twitter_verified_badge' />
+                        )}
+                      </p>
                       <p>@{profile.user.pseudo}</p>
                       {profile.bio && <p>{profile.bio}</p>}
                     </div>

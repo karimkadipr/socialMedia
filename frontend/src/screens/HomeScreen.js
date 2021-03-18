@@ -47,7 +47,7 @@ const HomeScreen = ({ history }) => {
   const [text, setText] = useState('')
 
   const getMyProfileValue = useSelector((state) => state.getMyProfile)
-  const { loading, profileInfo, error } = getMyProfileValue
+  const { profileInfo, error } = getMyProfileValue
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
@@ -224,6 +224,7 @@ const HomeScreen = ({ history }) => {
               {posts && posts.length !== 0 && profileInfo ? (
                 posts.map((post) => (
                   <Post
+                    isVerified={post.profile.isVerified}
                     isLiked={post.isLiked}
                     OthersAvatar={post.avatar}
                     postUser={post.user}

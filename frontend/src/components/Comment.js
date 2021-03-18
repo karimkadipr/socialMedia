@@ -3,10 +3,12 @@ import { useSelector } from 'react-redux'
 import { IconButton } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 import Linkify from 'react-linkify'
+import { ReactComponent as TwitterBadgeSvg } from './images/twitter-verified-badge.svg'
 import classNames from 'classnames'
 import './styles/comment.scss'
 
 const Comment = ({
+  isVerified,
   written,
   handleDeleteComment,
   commentUser,
@@ -42,7 +44,15 @@ const Comment = ({
       <div className='content_post_comment'>
         <div className='delete_comment_post_container_aaa'>
           <div className='name_pseudo_post_container'>
-            <p>{name} </p>
+            <p className='twitter_badge_with_name'>
+              {name}
+              {isVerified && (
+                <TwitterBadgeSvg
+                  className='twitter_verified_badge'
+                  style={{ paddingRight: ' 0.5rem' }}
+                />
+              )}
+            </p>
             {pseudo && <p>@{pseudo}</p>}
           </div>
 

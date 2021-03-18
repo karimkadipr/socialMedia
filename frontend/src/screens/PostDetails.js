@@ -21,6 +21,7 @@ import ChatBubbleIcon from '@material-ui/icons/ChatBubble'
 import ShareIcon from '@material-ui/icons/Share'
 import DeleteIcon from '@material-ui/icons/Delete'
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace'
+import { ReactComponent as TwitterBadgeSvg } from './images/twitter-verified-badge.svg'
 import './styles/layout.scss'
 import './styles/postDetails.scss'
 import Comment from '../components/Comment'
@@ -212,7 +213,12 @@ const PostDetails = ({ history, match }) => {
                       />
                     )}
                     <div>
-                      <p>{post.name} </p>
+                      <p className='twitter_badge_with_name'>
+                        {post.name}
+                        {profileInfo.isVerified && (
+                          <TwitterBadgeSvg className='twitter_verified_badge' />
+                        )}
+                      </p>
                       <p>@{post.pseudo}</p>
                     </div>
                   </Link>
@@ -257,6 +263,7 @@ const PostDetails = ({ history, match }) => {
                 {open && (
                   <div>
                     <Comment
+                      isVerified={profileInfo.isVerified}
                       name={profileInfo.user.name}
                       pseudo={profileInfo.user.pseudo}
                       avatar={profileInfo.avatar}>
@@ -281,6 +288,7 @@ const PostDetails = ({ history, match }) => {
                   {comments &&
                     comments.map((comment) => (
                       <Comment
+                        isVerified={comment.isVerified}
                         written={true}
                         handleDeleteComment={() =>
                           handleDeleteComment(postId, comment._id)

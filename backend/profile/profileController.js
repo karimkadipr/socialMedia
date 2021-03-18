@@ -137,6 +137,30 @@ const updateProfile = asyncHandler(async (req, res) => {
   res.status(200).json(profile)
 })
 
+const setProfileVerified = asyncHandler(async (req, res) => {
+  const profileId = req.params.id
+  const profile = await Profile.findById(profileId)
+  const user = await User.findOne({ _id: profile.user })
+  const posts = await Post.find({})
+  if (profile && user && posts) {
+    profile.isVerified = true
+    posts.map(async (post) => {
+      post.comments.map(async (comment) => {
+        if (comment.user.equals(user._id)) {
+          comment.isVerified = true
+        }
+      })
+      await post.save()
+    })
+    await profile.save()
+
+    res.json('Profile updated to verified')
+  } else {
+    res.status(404)
+    throw new Error('profile does not exist')
+  }
+})
+
 const getProfileById = asyncHandler(async (req, res) => {
   const profileId = req.params.id
   const profile = await Profile.findById(profileId).populate(
@@ -298,4 +322,5 @@ export {
   unFollowAProfile,
   getAllProfiles,
   checkFollow,
+  setProfileVerified,
 }
