@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAnyPost, deleteCommentFromPost } from '../post/postActions'
 import { getAllProfiles, getMyProfile } from '../profile/profileActions'
-import { IconButton } from '@material-ui/core'
+import { Collapse, IconButton } from '@material-ui/core'
 import { Button, InputBase } from '@material-ui/core'
 
 import {
@@ -30,8 +30,11 @@ import RightSide from '../components/RightSide'
 import LeftSide from '../components/LeftSide'
 import classNames from 'classnames'
 import SideBar from '../components/SideBar'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 const PostDetails = ({ history, match }) => {
+  const [comment, setComment] = useState('')
+  const [open, setOpen] = useState(false)
   const [dimensions, setDimensions] = useState({
     height: window.innerHeight,
     width: window.innerWidth,
@@ -65,8 +68,6 @@ const PostDetails = ({ history, match }) => {
   )
 
   const dispatch = useDispatch()
-  const [comment, setComment] = useState('')
-  const [open, setOpen] = useState('')
 
   const getMyProfileValue = useSelector((state) => state.getMyProfile)
   const { error, profileInfo } = getMyProfileValue
@@ -260,49 +261,54 @@ const PostDetails = ({ history, match }) => {
                     )}
                   </div>
                 </div>
-                {open && (
-                  <div>
-                    <Comment
-                      isVerified={profileInfo.isVerified}
-                      name={profileInfo.user.name}
-                      pseudo={profileInfo.user.pseudo}
-                      avatar={profileInfo.avatar}>
-                      <div className='write_new_comment_post_screen'>
-                        <InputBase
-                          onKeyUp={(e) => handleKeypress(e, comment, postId)}
-                          multiline={true}
-                          onChange={(e) => setComment(e.target.value)}
-                          placeholder='Insert your comment'
-                          inputProps={{ 'aria-label': 'naked' }}
-                        />
-                        <Button
-                          className='button_add_comment_post_screen'
-                          onClick={() => handleSubmitComment(comment, postId)}>
-                          Submit
-                        </Button>
-                      </div>
-                    </Comment>
-                  </div>
-                )}
-                <div className='comments_section_post'>
+
+                <Collapse in={open}>
+                  <Comment
+                    isVerified={profileInfo.isVerified}
+                    name={profileInfo.user.name}
+                    pseudo={profileInfo.user.pseudo}
+                    avatar={profileInfo.avatar}>
+                    <div className='write_new_comment_post_screen'>
+                      <InputBase
+                        onKeyUp={(e) => handleKeypress(e, comment, postId)}
+                        multiline={true}
+                        onChange={(e) => setComment(e.target.value)}
+                        placeholder='Insert your comment'
+                        inputProps={{ 'aria-label': 'naked' }}
+                      />
+                      <Button
+                        className='button_add_comment_post_screen'
+                        onClick={() => handleSubmitComment(comment, postId)}>
+                        Submit
+                      </Button>
+                    </div>
+                  </Comment>
+                </Collapse>
+
+                <TransitionGroup className='comments_section_post'>
                   {comments &&
                     comments.map((comment) => (
-                      <Comment
-                        isVerified={comment.isVerified}
-                        written={true}
-                        handleDeleteComment={() =>
-                          handleDeleteComment(postId, comment._id)
-                        }
+                      <CSSTransition
                         key={comment._id}
-                        commentUser={comment.user}
-                        myUser={userInfo._id}
-                        name={comment.name}
-                        pseudo={comment.pseudo}
-                        avatar={comment.avatar}>
-                        {comment.text}
-                      </Comment>
+                        timeout={500}
+                        classNames='comment-container'>
+                        <Comment
+                          isVerified={comment.isVerified}
+                          written={true}
+                          handleDeleteComment={() =>
+                            handleDeleteComment(postId, comment._id)
+                          }
+                          key={comment._id}
+                          commentUser={comment.user}
+                          myUser={userInfo._id}
+                          name={comment.name}
+                          pseudo={comment.pseudo}
+                          avatar={comment.avatar}>
+                          {comment.text}
+                        </Comment>
+                      </CSSTransition>
                     ))}
-                </div>
+                </TransitionGroup>
               </>
             ) : (
               <div>Post Does not exist</div>

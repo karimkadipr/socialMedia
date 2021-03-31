@@ -5,6 +5,7 @@ import DeleteIcon from '@material-ui/icons/Delete'
 import Linkify from 'react-linkify'
 import { ReactComponent as TwitterBadgeSvg } from './images/twitter-verified-badge.svg'
 import classNames from 'classnames'
+import { CSSTransition } from 'react-transition-group'
 import './styles/comment.scss'
 
 const Comment = ({

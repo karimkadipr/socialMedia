@@ -156,6 +156,7 @@
         border-top: 0;
         position: relative;
         padding-top: 53px;
+        overflow: hidden;
 
         .profile_info_container_post {
           p:first-child {
@@ -345,4 +346,23 @@
     width: 566px;
     padding: 0 1rem;
   }
+}
+
+.comment-container-enter {
+  opacity: 0;
+  transform: translateX(-110%);
+}
+.comment-container-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 500ms;
+}
+.comment-container-exit {
+  transform: translateX(0);
+  opacity: 1;
+}
+.comment-container-exit-active {
+  opacity: 0;
+  transform: translateX(-110%);
+  transition: all 500ms;
 }

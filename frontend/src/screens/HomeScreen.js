@@ -24,6 +24,7 @@ import RightSide from '../components/RightSide'
 import LeftSide from '../components/LeftSide'
 import classNames from 'classnames'
 import SideBar from '../components/SideBar'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 const HomeScreen = ({ history }) => {
   const [dimensions, setDimensions] = useState({
@@ -199,7 +200,7 @@ const HomeScreen = ({ history }) => {
                   ) : (
                     <img
                       src='/images/empty_profile_pic.jpg'
-                      alt='No profil pic'
+                      alt='No profile pic'
                     />
                   )}
                 </div>
@@ -220,38 +221,46 @@ const HomeScreen = ({ history }) => {
               </div>
             </div>
             <div className='empty_space_home_page'></div>
-            <div className='posts_container_home'>
-              {posts && posts.length !== 0 && profileInfo ? (
+            <TransitionGroup className='posts_container_home'>
+              {posts &&
+                posts.length !== 0 &&
+                profileInfo &&
                 posts.map((post) => (
-                  <Post
-                    isVerified={post.profile.isVerified}
-                    isLiked={post.isLiked}
-                    OthersAvatar={post.avatar}
-                    postUser={post.user}
-                    myId={profileInfo.user._id}
+                  <CSSTransition
                     key={post._id}
-                    postId={post._id}
-                    pseudo={post.pseudo}
-                    handleLike={() => handleLikePost(post._id)}
-                    handleDeletePost={() => handleDeletePost(post._id)}
-                    handleInputComment={handleInputComment}
-                    handleSubmitComment={() =>
-                      handleSubmitComment(comment, post._id)
-                    }
-                    createdAt={post.createdAt}
-                    name={post.name}
-                    numberOfLikes={post.numberOfLikes}
-                    numberOfComments={post.numberOfComments}>
-                    {post.text}
-                  </Post>
-                ))
-              ) : (
-                <p className='no_post_container'>
-                  <p>No posts</p>
-                  <NoPostSvg />
-                </p>
-              )}
-            </div>
+                    classNames='comment-container'
+                    timeout={500}>
+                    <Post
+                      isVerified={post.profile.isVerified}
+                      isLiked={post.isLiked}
+                      OthersAvatar={post.avatar}
+                      postUser={post.user}
+                      myId={profileInfo.user._id}
+                      key={post._id}
+                      postId={post._id}
+                      pseudo={post.pseudo}
+                      handleLike={() => handleLikePost(post._id)}
+                      handleDeletePost={() => handleDeletePost(post._id)}
+                      handleInputComment={handleInputComment}
+                      handleSubmitComment={() =>
+                        handleSubmitComment(comment, post._id)
+                      }
+                      createdAt={post.createdAt}
+                      name={post.name}
+                      numberOfLikes={post.numberOfLikes}
+                      numberOfComments={post.numberOfComments}>
+                      {post.text}
+                    </Post>
+                  </CSSTransition>
+                ))}
+            </TransitionGroup>
+
+            {posts && posts.length === 0 && (
+              <p className='no_post_container'>
+                <p>No posts</p>
+                <NoPostSvg />
+              </p>
+            )}
           </div>
 
           <RightSide profiles={profiles} showMore />
